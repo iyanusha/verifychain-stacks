@@ -1,5 +1,5 @@
-;; VerifyChain Registry Contract - Contract 3
-;; Provider Registration + Commitments + Stake Management
+;; VerifyChain Registry Contract
+;; Provider Registration + Commitments + Stake Management + Slashing & Reputation
 
 ;; Error codes
 (define-constant ERR-NOT-AUTHORIZED (err u100))
@@ -49,6 +49,17 @@
     available-stake: uint,
     pending-withdrawals: uint,
     last-withdrawal-request: uint
+  }
+)
+
+;; Reputation tracking
+(define-map provider-reputation
+  { provider-id: uint }
+  {
+    verification-success-count: uint,
+    verification-failure-count: uint,
+    total-commitments: uint,
+    last-activity-block: uint
   }
 )
 
@@ -118,6 +129,16 @@
           last-withdrawal-request: u0
         })
 
+      ;; Initialize reputation
+      (map-set provider-reputation
+        { provider-id: new-id }
+        {
+          verification-success-count: u0,
+          verification-failure-count: u0,
+          total-commitments: u0,
+          last-activity-block: block-height
+        })
+
       ;; Create lookup
       (map-set provider-lookup
         { owner: tx-sender }
@@ -169,46 +190,55 @@
     ;; Get provider data
     (let ((provider (unwrap! (map-get? providers { provider-id: provider-id }) ERR-PROVIDER-NOT-FOUND)))
       (let ((stake-data (unwrap! (map-get? provider-stakes { provider-id: provider-id }) ERR-PROVIDER-NOT-FOUND)))
-        (let ((required-stake (calculate-stake-required storage-size-mb duration-blocks))
-              (new-id (var-get next-commitment-id)))
+        (let ((reputation-data (unwrap! (map-get? provider-reputation { provider-id: provider-id }) ERR-PROVIDER-NOT-FOUND)))
+          (let ((required-stake (calculate-stake-required storage-size-mb duration-blocks))
+                (new-id (var-get next-commitment-id)))
 
-          ;; Check if provider is active
-          (asserts! (get active provider) ERR-PROVIDER-NOT-FOUND)
+            ;; Check if provider is active
+            (asserts! (get active provider) ERR-PROVIDER-NOT-FOUND)
 
-          ;; Check if provider has enough available stake
-          (asserts! (>= (get available-stake stake-data) required-stake) ERR-INSUFFICIENT-STAKE)
+            ;; Check if provider has enough available stake
+            (asserts! (>= (get available-stake stake-data) required-stake) ERR-INSUFFICIENT-STAKE)
 
-          ;; Check storage capacity
-          (asserts! (<= storage-size-mb (get storage-capacity provider)) ERR-INVALID-PARAMETERS)
+            ;; Check storage capacity
+            (asserts! (<= storage-size-mb (get storage-capacity provider)) ERR-INVALID-PARAMETERS)
 
-          ;; Create commitment
-          (map-set commitments
-            { commitment-id: new-id }
-            {
-              provider-id: provider-id,
-              data-root: data-root,
-              chunk-count: chunk-count,
-              storage-size-mb: storage-size-mb,
-              duration-blocks: duration-blocks,
-              stake-required: required-stake,
-              start-block: block-height,
-              end-block: (+ block-height duration-blocks),
-              data-owner: tx-sender,
-              active: true
-            })
+            ;; Create commitment
+            (map-set commitments
+              { commitment-id: new-id }
+              {
+                provider-id: provider-id,
+                data-root: data-root,
+                chunk-count: chunk-count,
+                storage-size-mb: storage-size-mb,
+                duration-blocks: duration-blocks,
+                stake-required: required-stake,
+                start-block: block-height,
+                end-block: (+ block-height duration-blocks),
+                data-owner: tx-sender,
+                active: true
+              })
 
-          ;; Lock stake for this commitment
-          (map-set provider-stakes
-            { provider-id: provider-id }
-            (merge stake-data {
-              locked-stake: (+ (get locked-stake stake-data) required-stake),
-              available-stake: (- (get available-stake stake-data) required-stake)
-            }))
+            ;; Lock stake for this commitment
+            (map-set provider-stakes
+              { provider-id: provider-id }
+              (merge stake-data {
+                locked-stake: (+ (get locked-stake stake-data) required-stake),
+                available-stake: (- (get available-stake stake-data) required-stake)
+              }))
 
-          ;; Increment commitment ID
-          (var-set next-commitment-id (+ new-id u1))
+            ;; Update reputation
+            (map-set provider-reputation
+              { provider-id: provider-id }
+              (merge reputation-data {
+                total-commitments: (+ (get total-commitments reputation-data) u1),
+                last-activity-block: block-height
+              }))
 
-          (ok new-id))))))
+            ;; Increment commitment ID
+            (var-set next-commitment-id (+ new-id u1))
+
+            (ok new-id)))))))
 
 ;; Complete commitment and unlock stake
 (define-public (complete-commitment (commitment-id uint))
@@ -245,6 +275,45 @@
               })))
 
           (ok commitment-id))))))
+
+;; Slash provider stake
+(define-public (slash-provider-stake (provider-id uint) (slash-amount uint))
+  (begin
+    ;; Only contract owner can slash for now
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+
+    (let ((stake-data (unwrap! (map-get? provider-stakes { provider-id: provider-id }) ERR-PROVIDER-NOT-FOUND)))
+      (let ((reputation-data (unwrap! (map-get? provider-reputation { provider-id: provider-id }) ERR-PROVIDER-NOT-FOUND)))
+        (let ((available-for-slash (+ (get available-stake stake-data) (get locked-stake stake-data))))
+          (let ((actual-slash (if (<= slash-amount available-for-slash) slash-amount available-for-slash)))
+
+            ;; Update stake data
+            (if (>= (get available-stake stake-data) actual-slash)
+              ;; Slash from available stake first
+              (map-set provider-stakes
+                { provider-id: provider-id }
+                (merge stake-data {
+                  total-staked: (- (get total-staked stake-data) actual-slash),
+                  available-stake: (- (get available-stake stake-data) actual-slash)
+                }))
+              ;; Slash from both available and locked stake
+              (map-set provider-stakes
+                { provider-id: provider-id }
+                (merge stake-data {
+                  total-staked: (- (get total-staked stake-data) actual-slash),
+                  available-stake: u0,
+                  locked-stake: (- (get locked-stake stake-data) (- actual-slash (get available-stake stake-data)))
+                })))
+
+            ;; Update reputation
+            (map-set provider-reputation
+              { provider-id: provider-id }
+              (merge reputation-data {
+                verification-failure-count: (+ (get verification-failure-count reputation-data) u1),
+                last-activity-block: block-height
+              }))
+
+            (ok actual-slash)))))))
 
 ;; Request stake withdrawal
 (define-public (request-withdrawal (amount uint))
@@ -294,6 +363,22 @@
 
           (ok withdrawal-amount))))))
 
+;; Record successful verification
+(define-public (record-successful-verification (provider-id uint))
+  (begin
+    ;; Only contract owner can update for now
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+
+    (let ((reputation-data (unwrap! (map-get? provider-reputation { provider-id: provider-id }) ERR-PROVIDER-NOT-FOUND)))
+      (map-set provider-reputation
+        { provider-id: provider-id }
+        (merge reputation-data {
+          verification-success-count: (+ (get verification-success-count reputation-data) u1),
+          last-activity-block: block-height
+        }))
+
+      (ok (+ (get verification-success-count reputation-data) u1)))))
+
 ;; Read-only functions
 
 (define-read-only (get-provider (provider-id uint))
@@ -306,6 +391,9 @@
 
 (define-read-only (get-provider-stakes (provider-id uint))
   (map-get? provider-stakes { provider-id: provider-id }))
+
+(define-read-only (get-provider-reputation (provider-id uint))
+  (map-get? provider-reputation { provider-id: provider-id }))
 
 (define-read-only (get-commitment (commitment-id uint))
   (map-get? commitments { commitment-id: commitment-id }))
