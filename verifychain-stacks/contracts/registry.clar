@@ -1,5 +1,5 @@
-;; VerifyChain Registry Contract
-;; Handles storage provider registration and basic storage commitments
+;; VerifyChain Registry Contract - Contract 2
+;; Provider Registration + Commitment Creation System
 
 ;; Error codes
 (define-constant ERR-NOT-AUTHORIZED (err u100))
@@ -7,138 +7,235 @@
 (define-constant ERR-INSUFFICIENT-STAKE (err u102))
 (define-constant ERR-PROVIDER-NOT-FOUND (err u103))
 (define-constant ERR-INVALID-PARAMETERS (err u104))
+(define-constant ERR-COMMITMENT-NOT-FOUND (err u106))
+(define-constant ERR-INSUFFICIENT-BALANCE (err u107))
 
 ;; Contract owner
 (define-constant CONTRACT-OWNER tx-sender)
 
-;; Minimum stake required (1 STX)
-(define-constant MIN-STAKE u1000000)
+;; Economic parameters
+(define-constant BASE-STAKE-RATE u1000) ;; 0.001 STX per MB per block
+(define-constant MIN-STAKE-AMOUNT u1000000) ;; Minimum 1 STX stake
 
 ;; Data variables
 (define-data-var next-provider-id uint u1)
 (define-data-var next-commitment-id uint u1)
 
-;; Maps
+;; Provider data structure
 (define-map providers
   { provider-id: uint }
   {
     owner: principal,
-    stake-amount: uint,
     storage-capacity: uint,
-    active: bool
+    active: bool,
+    registration-block: uint
   }
 )
 
+;; Provider lookup by principal
 (define-map provider-lookup
   { owner: principal }
   { provider-id: uint }
 )
 
+;; Staking data
+(define-map provider-stakes
+  { provider-id: uint }
+  {
+    total-staked: uint,
+    locked-stake: uint,
+    available-stake: uint
+  }
+)
+
+;; Commitment data structure
 (define-map commitments
   { commitment-id: uint }
   {
     provider-id: uint,
     data-root: (buff 32),
     chunk-count: uint,
+    storage-size-mb: uint,
+    duration-blocks: uint,
+    stake-required: uint,
+    start-block: uint,
+    end-block: uint,
+    data-owner: principal,
     active: bool
   }
 )
 
-;; Register as a storage provider
-(define-public (register-provider (storage-capacity uint))
-  (let 
-    (
-      (new-id (var-get next-provider-id))
-    )
+;; Helper functions
+
+;; Calculate required stake for a commitment
+(define-private (calculate-stake-required (storage-mb uint) (duration-blocks uint))
+  (let ((calculated-stake (* (* storage-mb duration-blocks) BASE-STAKE-RATE)))
+    (if (>= calculated-stake MIN-STAKE-AMOUNT)
+      calculated-stake
+      MIN-STAKE-AMOUNT)))
+
+;; Public functions
+
+;; Register as a storage provider with initial stake
+(define-public (register-provider (storage-capacity uint) (initial-stake uint))
+  (begin
     ;; Check if already registered
     (asserts! (is-none (map-get? provider-lookup { owner: tx-sender })) ERR-ALREADY-REGISTERED)
 
-    ;; Check if enough STX
-    (asserts! (>= (stx-get-balance tx-sender) MIN-STAKE) ERR-INSUFFICIENT-STAKE)
-
-    ;; Check valid capacity
+    ;; Validate parameters
     (asserts! (> storage-capacity u0) ERR-INVALID-PARAMETERS)
+    (asserts! (>= initial-stake MIN-STAKE-AMOUNT) ERR-INSUFFICIENT-STAKE)
+    (asserts! (>= (stx-get-balance tx-sender) initial-stake) ERR-INSUFFICIENT-BALANCE)
 
-    ;; Transfer stake
-    (try! (stx-transfer? MIN-STAKE tx-sender (as-contract tx-sender)))
+    ;; Get new provider ID
+    (let ((new-id (var-get next-provider-id)))
 
-    ;; Register provider
-    (map-set providers 
-      { provider-id: new-id }
-      {
-        owner: tx-sender,
-        stake-amount: MIN-STAKE,
-        storage-capacity: storage-capacity,
-        active: true
-      }
-    )
+      ;; Transfer stake to contract
+      (try! (stx-transfer? initial-stake tx-sender (as-contract tx-sender)))
 
-    ;; Create lookup
-    (map-set provider-lookup
-      { owner: tx-sender }
-      { provider-id: new-id }
-    )
+      ;; Register provider
+      (map-set providers 
+        { provider-id: new-id }
+        {
+          owner: tx-sender,
+          storage-capacity: storage-capacity,
+          active: true,
+          registration-block: block-height
+        })
 
-    ;; Increment ID
-    (var-set next-provider-id (+ new-id u1))
+      ;; Initialize staking data
+      (map-set provider-stakes
+        { provider-id: new-id }
+        {
+          total-staked: initial-stake,
+          locked-stake: u0,
+          available-stake: initial-stake
+        })
 
-    (ok new-id)
-  )
-)
+      ;; Create lookup
+      (map-set provider-lookup
+        { owner: tx-sender }
+        { provider-id: new-id })
+
+      ;; Increment ID
+      (var-set next-provider-id (+ new-id u1))
+
+      (ok new-id))))
 
 ;; Create storage commitment
-(define-public (create-commitment (provider-id uint) (data-root (buff 32)) (chunk-count uint))
-  (let
-    (
-      (provider (unwrap! (map-get? providers { provider-id: provider-id }) ERR-PROVIDER-NOT-FOUND))
-      (new-id (var-get next-commitment-id))
-    )
-    ;; Check if provider is active
-    (asserts! (get active provider) ERR-PROVIDER-NOT-FOUND)
-
-    ;; Check valid parameters
+(define-public (create-commitment 
+  (provider-id uint) 
+  (data-root (buff 32)) 
+  (chunk-count uint)
+  (storage-size-mb uint)
+  (duration-blocks uint))
+  (begin
+    ;; Validate parameters
     (asserts! (> chunk-count u0) ERR-INVALID-PARAMETERS)
+    (asserts! (> storage-size-mb u0) ERR-INVALID-PARAMETERS)
+    (asserts! (> duration-blocks u0) ERR-INVALID-PARAMETERS)
 
-    ;; Create commitment
-    (map-set commitments
-      { commitment-id: new-id }
-      {
-        provider-id: provider-id,
-        data-root: data-root,
-        chunk-count: chunk-count,
-        active: true
-      }
-    )
+    ;; Get provider data
+    (let ((provider (unwrap! (map-get? providers { provider-id: provider-id }) ERR-PROVIDER-NOT-FOUND)))
+      (let ((stake-data (unwrap! (map-get? provider-stakes { provider-id: provider-id }) ERR-PROVIDER-NOT-FOUND)))
+        (let ((required-stake (calculate-stake-required storage-size-mb duration-blocks))
+              (new-id (var-get next-commitment-id)))
 
-    ;; Increment ID
-    (var-set next-commitment-id (+ new-id u1))
+          ;; Check if provider is active
+          (asserts! (get active provider) ERR-PROVIDER-NOT-FOUND)
 
-    (ok new-id)
-  )
-)
+          ;; Check if provider has enough available stake
+          (asserts! (>= (get available-stake stake-data) required-stake) ERR-INSUFFICIENT-STAKE)
 
-;; Get provider info
+          ;; Check storage capacity
+          (asserts! (<= storage-size-mb (get storage-capacity provider)) ERR-INVALID-PARAMETERS)
+
+          ;; Create commitment
+          (map-set commitments
+            { commitment-id: new-id }
+            {
+              provider-id: provider-id,
+              data-root: data-root,
+              chunk-count: chunk-count,
+              storage-size-mb: storage-size-mb,
+              duration-blocks: duration-blocks,
+              stake-required: required-stake,
+              start-block: block-height,
+              end-block: (+ block-height duration-blocks),
+              data-owner: tx-sender,
+              active: true
+            })
+
+          ;; Lock stake for this commitment
+          (map-set provider-stakes
+            { provider-id: provider-id }
+            (merge stake-data {
+              locked-stake: (+ (get locked-stake stake-data) required-stake),
+              available-stake: (- (get available-stake stake-data) required-stake)
+            }))
+
+          ;; Increment commitment ID
+          (var-set next-commitment-id (+ new-id u1))
+
+          (ok new-id))))))
+
+;; Complete commitment and unlock stake
+(define-public (complete-commitment (commitment-id uint))
+  (let ((commitment (unwrap! (map-get? commitments { commitment-id: commitment-id }) ERR-COMMITMENT-NOT-FOUND)))
+    (let ((provider-id (get provider-id commitment)))
+      (let ((stake-data (unwrap! (map-get? provider-stakes { provider-id: provider-id }) ERR-PROVIDER-NOT-FOUND)))
+        (let ((provider (unwrap! (map-get? providers { provider-id: provider-id }) ERR-PROVIDER-NOT-FOUND)))
+
+          ;; Check if commitment is active
+          (asserts! (get active commitment) ERR-INVALID-PARAMETERS)
+
+          ;; Check if commitment period has ended
+          (asserts! (>= block-height (get end-block commitment)) ERR-INVALID-PARAMETERS)
+
+          ;; Check authorization
+          (asserts! (or 
+            (is-eq tx-sender (get data-owner commitment))
+            (is-eq tx-sender (get owner provider))
+            (is-eq tx-sender CONTRACT-OWNER)
+          ) ERR-NOT-AUTHORIZED)
+
+          ;; Deactivate commitment
+          (map-set commitments
+            { commitment-id: commitment-id }
+            (merge commitment { active: false }))
+
+          ;; Unlock stake
+          (let ((stake-required (get stake-required commitment)))
+            (map-set provider-stakes
+              { provider-id: provider-id }
+              (merge stake-data {
+                locked-stake: (- (get locked-stake stake-data) stake-required),
+                available-stake: (+ (get available-stake stake-data) stake-required)
+              })))
+
+          (ok commitment-id))))))
+
+;; Read-only functions
+
 (define-read-only (get-provider (provider-id uint))
-  (map-get? providers { provider-id: provider-id })
-)
+  (map-get? providers { provider-id: provider-id }))
 
-;; Get provider by principal
 (define-read-only (get-provider-by-principal (owner principal))
   (match (map-get? provider-lookup { owner: owner })
     some-id (map-get? providers { provider-id: (get provider-id some-id) })
-    none
-  )
-)
+    none))
 
-;; Get commitment info
+(define-read-only (get-provider-stakes (provider-id uint))
+  (map-get? provider-stakes { provider-id: provider-id }))
+
 (define-read-only (get-commitment (commitment-id uint))
-  (map-get? commitments { commitment-id: commitment-id })
-)
+  (map-get? commitments { commitment-id: commitment-id }))
 
-;; Get next IDs
-(define-read-only (get-next-ids)
+(define-read-only (get-stake-required (storage-mb uint) (duration-blocks uint))
+  (calculate-stake-required storage-mb duration-blocks))
+
+(define-read-only (get-contract-status)
   {
     next-provider-id: (var-get next-provider-id),
     next-commitment-id: (var-get next-commitment-id)
-  }
-)
+  })
