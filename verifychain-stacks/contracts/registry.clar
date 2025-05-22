@@ -1,5 +1,5 @@
-;; VerifyChain Registry Contract - Contract 2
-;; Provider Registration + Commitment Creation System
+;; VerifyChain Registry Contract - Contract 3
+;; Provider Registration + Commitments + Stake Management
 
 ;; Error codes
 (define-constant ERR-NOT-AUTHORIZED (err u100))
@@ -7,6 +7,7 @@
 (define-constant ERR-INSUFFICIENT-STAKE (err u102))
 (define-constant ERR-PROVIDER-NOT-FOUND (err u103))
 (define-constant ERR-INVALID-PARAMETERS (err u104))
+(define-constant ERR-STAKE-LOCKED (err u105))
 (define-constant ERR-COMMITMENT-NOT-FOUND (err u106))
 (define-constant ERR-INSUFFICIENT-BALANCE (err u107))
 
@@ -16,6 +17,7 @@
 ;; Economic parameters
 (define-constant BASE-STAKE-RATE u1000) ;; 0.001 STX per MB per block
 (define-constant MIN-STAKE-AMOUNT u1000000) ;; Minimum 1 STX stake
+(define-constant WITHDRAWAL-DELAY u144) ;; 24 hours delay (144 blocks)
 
 ;; Data variables
 (define-data-var next-provider-id uint u1)
@@ -44,7 +46,9 @@
   {
     total-staked: uint,
     locked-stake: uint,
-    available-stake: uint
+    available-stake: uint,
+    pending-withdrawals: uint,
+    last-withdrawal-request: uint
   }
 )
 
@@ -109,7 +113,9 @@
         {
           total-staked: initial-stake,
           locked-stake: u0,
-          available-stake: initial-stake
+          available-stake: initial-stake,
+          pending-withdrawals: u0,
+          last-withdrawal-request: u0
         })
 
       ;; Create lookup
@@ -121,6 +127,31 @@
       (var-set next-provider-id (+ new-id u1))
 
       (ok new-id))))
+
+;; Add additional stake to provider account
+(define-public (add-stake (additional-amount uint))
+  (begin
+    ;; Validate amount
+    (asserts! (> additional-amount u0) ERR-INVALID-PARAMETERS)
+    (asserts! (>= (stx-get-balance tx-sender) additional-amount) ERR-INSUFFICIENT-BALANCE)
+
+    ;; Get provider ID
+    (let ((provider-lookup-result (unwrap! (map-get? provider-lookup { owner: tx-sender }) ERR-PROVIDER-NOT-FOUND)))
+      (let ((provider-id (get provider-id provider-lookup-result)))
+        (let ((stake-data (unwrap! (map-get? provider-stakes { provider-id: provider-id }) ERR-PROVIDER-NOT-FOUND)))
+
+          ;; Transfer additional stake
+          (try! (stx-transfer? additional-amount tx-sender (as-contract tx-sender)))
+
+          ;; Update stake data
+          (map-set provider-stakes
+            { provider-id: provider-id }
+            (merge stake-data {
+              total-staked: (+ (get total-staked stake-data) additional-amount),
+              available-stake: (+ (get available-stake stake-data) additional-amount)
+            }))
+
+          (ok additional-amount))))))
 
 ;; Create storage commitment
 (define-public (create-commitment 
@@ -214,6 +245,54 @@
               })))
 
           (ok commitment-id))))))
+
+;; Request stake withdrawal
+(define-public (request-withdrawal (amount uint))
+  (begin
+    (asserts! (> amount u0) ERR-INVALID-PARAMETERS)
+
+    (let ((provider-lookup-result (unwrap! (map-get? provider-lookup { owner: tx-sender }) ERR-PROVIDER-NOT-FOUND)))
+      (let ((provider-id (get provider-id provider-lookup-result)))
+        (let ((stake-data (unwrap! (map-get? provider-stakes { provider-id: provider-id }) ERR-PROVIDER-NOT-FOUND)))
+
+          (asserts! (<= amount (get available-stake stake-data)) ERR-INSUFFICIENT-STAKE)
+
+          ;; Update stake data
+          (map-set provider-stakes
+            { provider-id: provider-id }
+            (merge stake-data {
+              available-stake: (- (get available-stake stake-data) amount),
+              pending-withdrawals: (+ (get pending-withdrawals stake-data) amount),
+              last-withdrawal-request: block-height
+            }))
+
+          (ok amount))))))
+
+;; Execute withdrawal
+(define-public (execute-withdrawal)
+  (let ((provider-lookup-result (unwrap! (map-get? provider-lookup { owner: tx-sender }) ERR-PROVIDER-NOT-FOUND)))
+    (let ((provider-id (get provider-id provider-lookup-result)))
+      (let ((stake-data (unwrap! (map-get? provider-stakes { provider-id: provider-id }) ERR-PROVIDER-NOT-FOUND)))
+        (let ((withdrawal-amount (get pending-withdrawals stake-data)))
+
+          ;; Check if there are pending withdrawals
+          (asserts! (> withdrawal-amount u0) ERR-INVALID-PARAMETERS)
+
+          ;; Check if delay period has passed
+          (asserts! (>= block-height (+ (get last-withdrawal-request stake-data) WITHDRAWAL-DELAY)) ERR-STAKE-LOCKED)
+
+          ;; Transfer STX back to provider
+          (try! (as-contract (stx-transfer? withdrawal-amount tx-sender tx-sender)))
+
+          ;; Update stake data
+          (map-set provider-stakes
+            { provider-id: provider-id }
+            (merge stake-data {
+              total-staked: (- (get total-staked stake-data) withdrawal-amount),
+              pending-withdrawals: u0
+            }))
+
+          (ok withdrawal-amount))))))
 
 ;; Read-only functions
 
