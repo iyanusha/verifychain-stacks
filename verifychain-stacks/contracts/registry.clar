@@ -1,5 +1,5 @@
 ;; VerifyChain Registry Contract
-;; Provider Registration + Commitments + Stake Management + Slashing & Reputation
+;; Full Economic Security Implementation with Admin Controls
 
 ;; Error codes
 (define-constant ERR-NOT-AUTHORIZED (err u100))
@@ -10,6 +10,7 @@
 (define-constant ERR-STAKE-LOCKED (err u105))
 (define-constant ERR-COMMITMENT-NOT-FOUND (err u106))
 (define-constant ERR-INSUFFICIENT-BALANCE (err u107))
+(define-constant ERR-CONTRACT-PAUSED (err u108))
 
 ;; Contract owner
 (define-constant CONTRACT-OWNER tx-sender)
@@ -22,6 +23,7 @@
 ;; Data variables
 (define-data-var next-provider-id uint u1)
 (define-data-var next-commitment-id uint u1)
+(define-data-var contract-paused bool false)
 
 ;; Provider data structure
 (define-map providers
@@ -89,11 +91,22 @@
       calculated-stake
       MIN-STAKE-AMOUNT)))
 
+;; Check if contract is not paused
+(define-private (check-contract-active)
+  (if (not (var-get contract-paused))
+    (ok true)
+    ERR-CONTRACT-PAUSED
+  )
+)
+
 ;; Public functions
 
 ;; Register as a storage provider with initial stake
 (define-public (register-provider (storage-capacity uint) (initial-stake uint))
   (begin
+    ;; Check contract not paused
+    (try! (check-contract-active))
+
     ;; Check if already registered
     (asserts! (is-none (map-get? provider-lookup { owner: tx-sender })) ERR-ALREADY-REGISTERED)
 
@@ -152,6 +165,9 @@
 ;; Add additional stake to provider account
 (define-public (add-stake (additional-amount uint))
   (begin
+    ;; Check contract not paused
+    (try! (check-contract-active))
+
     ;; Validate amount
     (asserts! (> additional-amount u0) ERR-INVALID-PARAMETERS)
     (asserts! (>= (stx-get-balance tx-sender) additional-amount) ERR-INSUFFICIENT-BALANCE)
@@ -182,6 +198,9 @@
   (storage-size-mb uint)
   (duration-blocks uint))
   (begin
+    ;; Check contract not paused
+    (try! (check-contract-active))
+
     ;; Validate parameters
     (asserts! (> chunk-count u0) ERR-INVALID-PARAMETERS)
     (asserts! (> storage-size-mb u0) ERR-INVALID-PARAMETERS)
@@ -404,5 +423,22 @@
 (define-read-only (get-contract-status)
   {
     next-provider-id: (var-get next-provider-id),
-    next-commitment-id: (var-get next-commitment-id)
+    next-commitment-id: (var-get next-commitment-id),
+    paused: (var-get contract-paused)
   })
+
+;; Admin functions (Contract Owner only)
+
+;; Emergency pause
+(define-public (pause-contract)
+  (begin
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+    (var-set contract-paused true)
+    (ok true)))
+
+;; Unpause contract
+(define-public (unpause-contract)
+  (begin
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+    (var-set contract-paused false)
+    (ok true)))
