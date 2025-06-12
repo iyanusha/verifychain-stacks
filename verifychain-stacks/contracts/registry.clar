@@ -216,6 +216,9 @@
             ;; Check if provider is active
             (asserts! (get active provider) ERR-PROVIDER-NOT-FOUND)
 
+            ;; Verify caller is provider owner
+            (asserts! (is-eq tx-sender (get owner provider)) ERR-NOT-AUTHORIZED)
+
             ;; Check if provider has enough available stake
             (asserts! (>= (get available-stake stake-data) required-stake) ERR-INSUFFICIENT-STAKE)
 
