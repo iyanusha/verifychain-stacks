@@ -361,7 +361,8 @@
 
 ;; Execute withdrawal
 (define-public (execute-withdrawal)
-  (let ((provider-lookup-result (unwrap! (map-get? provider-lookup { owner: tx-sender }) ERR-PROVIDER-NOT-FOUND)))
+  (let ((caller tx-sender)
+        (provider-lookup-result (unwrap! (map-get? provider-lookup { owner: tx-sender }) ERR-PROVIDER-NOT-FOUND)))
     (let ((provider-id (get provider-id provider-lookup-result)))
       (let ((stake-data (unwrap! (map-get? provider-stakes { provider-id: provider-id }) ERR-PROVIDER-NOT-FOUND)))
         (let ((withdrawal-amount (get pending-withdrawals stake-data)))
@@ -372,8 +373,8 @@
           ;; Check if delay period has passed
           (asserts! (>= block-height (+ (get last-withdrawal-request stake-data) WITHDRAWAL-DELAY)) ERR-STAKE-LOCKED)
 
-          ;; Transfer STX back to provider
-          (try! (as-contract (stx-transfer? withdrawal-amount tx-sender tx-sender)))
+          ;; Transfer STX back to provider owner
+          (try! (as-contract (stx-transfer? withdrawal-amount tx-sender caller)))
 
           ;; Update stake data
           (map-set provider-stakes
