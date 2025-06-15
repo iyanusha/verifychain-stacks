@@ -431,6 +431,23 @@
     paused: (var-get contract-paused)
   })
 
+;; Deactivate provider account
+(define-public (deactivate-provider)
+  (let ((provider-lookup-result (unwrap! (map-get? provider-lookup { owner: tx-sender }) ERR-PROVIDER-NOT-FOUND)))
+    (let ((provider-id (get provider-id provider-lookup-result)))
+      (let ((provider (unwrap! (map-get? providers { provider-id: provider-id }) ERR-PROVIDER-NOT-FOUND)))
+        (let ((stake-data (unwrap! (map-get? provider-stakes { provider-id: provider-id }) ERR-PROVIDER-NOT-FOUND)))
+
+          ;; Ensure no locked stake remains
+          (asserts! (is-eq (get locked-stake stake-data) u0) ERR-STAKE-LOCKED)
+
+          ;; Deactivate provider
+          (map-set providers
+            { provider-id: provider-id }
+            (merge provider { active: false }))
+
+          (ok provider-id))))))
+
 ;; Admin functions (Contract Owner only)
 
 ;; Emergency pause
