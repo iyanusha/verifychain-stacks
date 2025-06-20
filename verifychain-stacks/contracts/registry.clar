@@ -216,6 +216,9 @@
             ;; Check if provider is active
             (asserts! (get active provider) ERR-PROVIDER-NOT-FOUND)
 
+            ;; Verify caller is provider owner
+            (asserts! (is-eq tx-sender (get owner provider)) ERR-NOT-AUTHORIZED)
+
             ;; Check if provider has enough available stake
             (asserts! (>= (get available-stake stake-data) required-stake) ERR-INSUFFICIENT-STAKE)
 
@@ -358,7 +361,8 @@
 
 ;; Execute withdrawal
 (define-public (execute-withdrawal)
-  (let ((provider-lookup-result (unwrap! (map-get? provider-lookup { owner: tx-sender }) ERR-PROVIDER-NOT-FOUND)))
+  (let ((caller tx-sender)
+        (provider-lookup-result (unwrap! (map-get? provider-lookup { owner: tx-sender }) ERR-PROVIDER-NOT-FOUND)))
     (let ((provider-id (get provider-id provider-lookup-result)))
       (let ((stake-data (unwrap! (map-get? provider-stakes { provider-id: provider-id }) ERR-PROVIDER-NOT-FOUND)))
         (let ((withdrawal-amount (get pending-withdrawals stake-data)))
@@ -369,8 +373,8 @@
           ;; Check if delay period has passed
           (asserts! (>= block-height (+ (get last-withdrawal-request stake-data) WITHDRAWAL-DELAY)) ERR-STAKE-LOCKED)
 
-          ;; Transfer STX back to provider
-          (try! (as-contract (stx-transfer? withdrawal-amount tx-sender tx-sender)))
+          ;; Transfer STX back to provider owner
+          (try! (as-contract (stx-transfer? withdrawal-amount tx-sender caller)))
 
           ;; Update stake data
           (map-set provider-stakes
@@ -426,6 +430,23 @@
     next-commitment-id: (var-get next-commitment-id),
     paused: (var-get contract-paused)
   })
+
+;; Deactivate provider account
+(define-public (deactivate-provider)
+  (let ((provider-lookup-result (unwrap! (map-get? provider-lookup { owner: tx-sender }) ERR-PROVIDER-NOT-FOUND)))
+    (let ((provider-id (get provider-id provider-lookup-result)))
+      (let ((provider (unwrap! (map-get? providers { provider-id: provider-id }) ERR-PROVIDER-NOT-FOUND)))
+        (let ((stake-data (unwrap! (map-get? provider-stakes { provider-id: provider-id }) ERR-PROVIDER-NOT-FOUND)))
+
+          ;; Ensure no locked stake remains
+          (asserts! (is-eq (get locked-stake stake-data) u0) ERR-STAKE-LOCKED)
+
+          ;; Deactivate provider
+          (map-set providers
+            { provider-id: provider-id }
+            (merge provider { active: false }))
+
+          (ok provider-id))))))
 
 ;; Admin functions (Contract Owner only)
 

@@ -70,33 +70,44 @@ VerifyChain introduces an optimistic verification mechanism with the following k
 2. **Proof Anchoring**: Critical verification proofs are anchored to Bitcoin for maximum security
 3. **Cross-Chain Verification**: Enables verification of Bitcoin-stored data through Stacks contracts
 
+## Project Structure
+
+```
+verifychain-stacks/
+├── frontend/              # Next.js web application
+│   ├── src/
+│   │   ├── app/           # App router pages
+│   │   ├── components/    # React components
+│   │   ├── hooks/         # Custom hooks
+│   │   └── lib/           # Utility functions
+│   └── package.json
+├── verifychain-stacks/    # Clarity smart contracts
+│   ├── contracts/
+│   │   └── registry.clar  # Main registry contract
+│   ├── tests/
+│   └── Clarinet.toml
+└── README.md
+```
+
 ## Getting Started
 
 ### Prerequisites
 - Clarinet (Stacks smart contract development framework)
-- Node.js and npm
+- Node.js 18+ and npm
 - Git
 
-### Installation
+### Smart Contract Setup
 ```bash
-# Clone the repository
 git clone https://github.com/iyanusha/verifychain-stacks.git
-cd verifychain-stacks
-
-# Install dependencies
-npm install
-
-# Set up Clarinet
-clarinet integrate
+cd verifychain-stacks/verifychain-stacks
+clarinet test
 ```
 
-### Running Tests
+### Frontend Setup
 ```bash
-# Run smart contract tests
-clarinet test
-
-# Run integration tests
-npm test
+cd frontend
+npm install
+npm run dev
 ```
 
 ## How to Contribute
