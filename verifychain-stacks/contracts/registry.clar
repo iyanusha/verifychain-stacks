@@ -1,5 +1,5 @@
 ;; VerifyChain Registry Contract
-;; Full Economic Security Implementation with Admin Controls
+;; Clarity 4 - Economic Security with Admin Controls
 
 ;; Error codes
 (define-constant ERR-NOT-AUTHORIZED (err u100))
@@ -11,6 +11,7 @@
 (define-constant ERR-COMMITMENT-NOT-FOUND (err u106))
 (define-constant ERR-INSUFFICIENT-BALANCE (err u107))
 (define-constant ERR-CONTRACT-PAUSED (err u108))
+(define-constant ERR-INVALID-CONTRACT (err u109))
 
 ;; Contract owner
 (define-constant CONTRACT-OWNER tx-sender)
