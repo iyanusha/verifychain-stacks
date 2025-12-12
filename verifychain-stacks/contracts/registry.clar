@@ -429,7 +429,8 @@
   {
     next-provider-id: (var-get next-provider-id),
     next-commitment-id: (var-get next-commitment-id),
-    paused: (var-get contract-paused)
+    paused: (var-get contract-paused),
+    current-timestamp: (unwrap-panic (get-stacks-block-info? time block-height))
   })
 
 ;; Deactivate provider account
