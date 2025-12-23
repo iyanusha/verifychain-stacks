@@ -118,3 +118,49 @@ Clarinet.test({
     block.receipts[0].result.expectErr().expectUint(108);
   },
 });
+
+Clarinet.test({
+  name: "Contract status returns timestamp",
+  async fn(chain: Chain, accounts: Map<string, Account>) {
+    const deployer = accounts.get("deployer")!;
+
+    const result = chain.callReadOnlyFn(
+      "registry",
+      "get-contract-status",
+      [],
+      deployer.address
+    );
+
+    const status = result.result.expectTuple();
+    status["next-provider-id"].expectUint(1);
+    status["next-commitment-id"].expectUint(1);
+    status["paused"].expectBool(false);
+  },
+});
+
+Clarinet.test({
+  name: "Provider can deactivate when no locked stake",
+  async fn(chain: Chain, accounts: Map<string, Account>) {
+    const wallet1 = accounts.get("wallet_1")!;
+
+    chain.mineBlock([
+      Tx.contractCall(
+        "registry",
+        "register-provider",
+        [types.uint(1000), types.uint(1000000)],
+        wallet1.address
+      ),
+    ]);
+
+    let block = chain.mineBlock([
+      Tx.contractCall(
+        "registry",
+        "deactivate-provider",
+        [],
+        wallet1.address
+      ),
+    ]);
+
+    block.receipts[0].result.expectOk().expectUint(1);
+  },
+});
