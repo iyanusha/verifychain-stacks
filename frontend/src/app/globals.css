@@ -26,3 +26,9 @@ body {
     rgb(var(--background-start-rgb));
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
+
+/* Add TypeScript interfaces for storage verification */
+.typescript_types { @apply rounded-xl p-5 bg-white border border-gray-200 transition-all; }
+.typescript_types:hover { @apply shadow-md border-gray-300; }
+.typescript_types--active { @apply border-primary-500 ring-2 ring-primary-500/20; }
+.typescript_types__header { @apply flex items-center justify-between mb-4; }
