@@ -1,0 +1,23 @@
+"use client";
+import type { ReactNode } from 'react';
+
+interface Provider_dashboardProps {
+  children?: ReactNode;
+  variant?: 'default' | 'primary' | 'accent';
+  loading?: boolean;
+  className?: string;
+}
+
+export function Provider_dashboard({ children, variant = 'default', loading, className = '' }: Provider_dashboardProps) {
+  const styles = {
+    default: { background: '#ffffff', color: '#374151', border: '1px solid #e5e7eb' },
+    primary: { background: '#f0f4ff', color: '#312e81', border: '1px solid #dbe4fe' },
+    accent: { background: '#eef2ff', color: '#4f46e5', border: '1px solid #c7d2fe' },
+  };
+  if (loading) return <div className="animate-pulse bg-gray-200 rounded-xl h-32" />;
+  return (
+    <div className={`rounded-xl p-5 ${className}`} style={styles[variant]}>
+      {children}
+    </div>
+  );
+}
