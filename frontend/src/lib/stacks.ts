@@ -48,3 +48,5 @@ export const WALLET_IMPROVEMENTS_CONFIG = { refreshMs: 30000, retries: 3 } as co
 
 export const PROVIDER_DASHBOARD_CONFIG = { refreshMs: 30000, retries: 3 } as const;
 
+
+export const COMMITMENT_UI_CONFIG = { refreshMs: 30000, retries: 3 } as const;
