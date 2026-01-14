@@ -98,3 +98,9 @@ body {
 .commitment_ui:hover { @apply shadow-md border-gray-300; }
 .commitment_ui--active { @apply border-primary-500 ring-2 ring-primary-500/20; }
 .commitment_ui__header { @apply flex items-center justify-between mb-4; }
+
+/* Add stake management interface */
+.stake_management { @apply rounded-xl p-5 bg-white border border-gray-200 transition-all; }
+.stake_management:hover { @apply shadow-md border-gray-300; }
+.stake_management--active { @apply border-primary-500 ring-2 ring-primary-500/20; }
+.stake_management__header { @apply flex items-center justify-between mb-4; }
