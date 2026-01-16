@@ -110,3 +110,9 @@ body {
 .withdrawal_ui:hover { @apply shadow-md border-gray-300; }
 .withdrawal_ui--active { @apply border-primary-500 ring-2 ring-primary-500/20; }
 .withdrawal_ui__header { @apply flex items-center justify-between mb-4; }
+
+/* Add storage verification dashboard */
+.dashboard_page { @apply rounded-xl p-5 bg-white border border-gray-200 transition-all; }
+.dashboard_page:hover { @apply shadow-md border-gray-300; }
+.dashboard_page--active { @apply border-primary-500 ring-2 ring-primary-500/20; }
+.dashboard_page__header { @apply flex items-center justify-between mb-4; }
