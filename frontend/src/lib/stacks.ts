@@ -59,3 +59,5 @@ export const WITHDRAWAL_UI_CONFIG = { refreshMs: 30000, retries: 3 } as const;
 
 
 export const DASHBOARD_PAGE_CONFIG = { refreshMs: 30000, retries: 3 } as const;
+
+export const DARK_MODE_VARS_CONFIG = { refreshMs: 30000, retries: 3 } as const;
