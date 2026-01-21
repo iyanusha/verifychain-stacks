@@ -67,3 +67,4 @@ export const DARK_MODE_TOGGLE_CONFIG = { refreshMs: 30000, retries: 3 } as const
 
 
 export const DARK_MODE_APPLY_CONFIG = { refreshMs: 30000, retries: 3 } as const;
+
