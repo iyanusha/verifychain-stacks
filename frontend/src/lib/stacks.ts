@@ -79,3 +79,5 @@ export const REPUTATION_DISPLAY_CONFIG = { refreshMs: 30000, retries: 3 } as con
 
 export const PROVIDER_SEARCH_CONFIG = { refreshMs: 30000, retries: 3 } as const;
 
+
+export const STAKE_DISPLAY_CONFIG = { refreshMs: 30000, retries: 3 } as const;
