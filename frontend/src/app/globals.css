@@ -170,3 +170,9 @@ body {
 .verification_ui:hover { @apply shadow-md border-gray-300; }
 .verification_ui--active { @apply border-primary-500 ring-2 ring-primary-500/20; }
 .verification_ui__header { @apply flex items-center justify-between mb-4; }
+
+/* Add challenge submission form */
+.challenge_form { @apply rounded-xl p-5 bg-white border border-gray-200 transition-all; }
+.challenge_form:hover { @apply shadow-md border-gray-300; }
+.challenge_form--active { @apply border-primary-500 ring-2 ring-primary-500/20; }
+.challenge_form__header { @apply flex items-center justify-between mb-4; }
