@@ -89,3 +89,4 @@ export const VERIFICATION_UI_CONFIG = { refreshMs: 30000, retries: 3 } as const;
 export const CHALLENGE_FORM_CONFIG = { refreshMs: 30000, retries: 3 } as const;
 
 export const TEST_REGISTRY_CONFIG = { refreshMs: 30000, retries: 3 } as const;
+
