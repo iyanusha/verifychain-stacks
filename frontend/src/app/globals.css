@@ -194,3 +194,9 @@ body {
 .test_commitment:hover { @apply shadow-md border-gray-300; }
 .test_commitment--active { @apply border-primary-500 ring-2 ring-primary-500/20; }
 .test_commitment__header { @apply flex items-center justify-between mb-4; }
+
+/* Add stake management tests */
+.test_stake { @apply rounded-xl p-5 bg-white border border-gray-200 transition-all; }
+.test_stake:hover { @apply shadow-md border-gray-300; }
+.test_stake--active { @apply border-primary-500 ring-2 ring-primary-500/20; }
+.test_stake__header { @apply flex items-center justify-between mb-4; }
