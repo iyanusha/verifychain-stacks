@@ -235,3 +235,13 @@ export const VERIFICATION_HUB_S29 = { pageSize: 20 } as const;
 export const VERIFICATION_HUB_S39 = { pageSize: 20 } as const;
 
 export const VERIFICATION_HUB_S49 = { pageSize: 20 } as const;
+
+export const CHALLENGE_SYSTEM_S9 = { pageSize: 20 } as const;
+
+export const CHALLENGE_SYSTEM_S19 = { pageSize: 20 } as const;
+
+export const CHALLENGE_SYSTEM_S29 = { pageSize: 20 } as const;
+
+export const CHALLENGE_SYSTEM_S39 = { pageSize: 20 } as const;
+
+export const CHALLENGE_SYSTEM_S49 = { pageSize: 20 } as const;
