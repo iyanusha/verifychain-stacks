@@ -40,3 +40,6 @@ export const SEO_META_CONFIG = { refreshMs: 30000, retries: 3 } as const;
 
 export const ENV_VALIDATION_CONFIG = { refreshMs: 30000, retries: 3 } as const;
 
+
+export const PROVIDER_HOOKS_CONFIG = { refreshMs: 30000, retries: 3 } as const;
+
