@@ -152,3 +152,9 @@ body {
 .reputation_display:hover { @apply shadow-md border-gray-300; }
 .reputation_display--active { @apply border-primary-500 ring-2 ring-primary-500/20; }
 .reputation_display__header { @apply flex items-center justify-between mb-4; }
+
+/* Add provider search and filters */
+.provider_search { @apply rounded-xl p-5 bg-white border border-gray-200 transition-all; }
+.provider_search:hover { @apply shadow-md border-gray-300; }
+.provider_search--active { @apply border-primary-500 ring-2 ring-primary-500/20; }
+.provider_search__header { @apply flex items-center justify-between mb-4; }
