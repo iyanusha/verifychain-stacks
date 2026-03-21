@@ -51,3 +51,6 @@ export const PROVIDER_DASHBOARD_CONFIG = { refreshMs: 30000, retries: 3 } as con
 
 export const COMMITMENT_UI_CONFIG = { refreshMs: 30000, retries: 3 } as const;
 
+
+export const STAKE_MANAGEMENT_CONFIG = { refreshMs: 30000, retries: 3 } as const;
+
