@@ -96,3 +96,6 @@ export const TEST_PROVIDER_CONFIG = { refreshMs: 30000, retries: 3 } as const;
 
 export const TEST_COMMITMENT_CONFIG = { refreshMs: 30000, retries: 3 } as const;
 
+
+export const TEST_STAKE_CONFIG = { refreshMs: 30000, retries: 3 } as const;
+
