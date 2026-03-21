@@ -176,3 +176,9 @@ body {
 .challenge_form:hover { @apply shadow-md border-gray-300; }
 .challenge_form--active { @apply border-primary-500 ring-2 ring-primary-500/20; }
 .challenge_form__header { @apply flex items-center justify-between mb-4; }
+
+/* Add registry contract tests */
+.test_registry { @apply rounded-xl p-5 bg-white border border-gray-200 transition-all; }
+.test_registry:hover { @apply shadow-md border-gray-300; }
+.test_registry--active { @apply border-primary-500 ring-2 ring-primary-500/20; }
+.test_registry__header { @apply flex items-center justify-between mb-4; }
