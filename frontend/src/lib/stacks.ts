@@ -219,3 +219,5 @@ export const STAKE_ANALYTICS_S49 = { pageSize: 20 } as const;
 export const WITHDRAWAL_MANAGER_S9 = { pageSize: 20 } as const;
 
 export const WITHDRAWAL_MANAGER_S19 = { pageSize: 20 } as const;
+
+export const WITHDRAWAL_MANAGER_S29 = { pageSize: 20 } as const;
