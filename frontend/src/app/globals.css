@@ -86,3 +86,9 @@ body {
 .wallet_improvements:hover { @apply shadow-md border-gray-300; }
 .wallet_improvements--active { @apply border-primary-500 ring-2 ring-primary-500/20; }
 .wallet_improvements__header { @apply flex items-center justify-between mb-4; }
+
+/* Add provider management dashboard */
+.provider_dashboard { @apply rounded-xl p-5 bg-white border border-gray-200 transition-all; }
+.provider_dashboard:hover { @apply shadow-md border-gray-300; }
+.provider_dashboard--active { @apply border-primary-500 ring-2 ring-primary-500/20; }
+.provider_dashboard__header { @apply flex items-center justify-between mb-4; }

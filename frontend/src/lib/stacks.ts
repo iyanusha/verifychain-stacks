@@ -45,3 +45,6 @@ export const PROVIDER_HOOKS_CONFIG = { refreshMs: 30000, retries: 3 } as const;
 
 
 export const WALLET_IMPROVEMENTS_CONFIG = { refreshMs: 30000, retries: 3 } as const;
+
+export const PROVIDER_DASHBOARD_CONFIG = { refreshMs: 30000, retries: 3 } as const;
+
