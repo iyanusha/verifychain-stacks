@@ -213,3 +213,5 @@ export const STAKE_ANALYTICS_S19 = { pageSize: 20 } as const;
 export const STAKE_ANALYTICS_S29 = { pageSize: 20 } as const;
 
 export const STAKE_ANALYTICS_S39 = { pageSize: 20 } as const;
+
+export const STAKE_ANALYTICS_S49 = { pageSize: 20 } as const;
