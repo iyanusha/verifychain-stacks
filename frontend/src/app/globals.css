@@ -182,3 +182,9 @@ body {
 .test_registry:hover { @apply shadow-md border-gray-300; }
 .test_registry--active { @apply border-primary-500 ring-2 ring-primary-500/20; }
 .test_registry__header { @apply flex items-center justify-between mb-4; }
+
+/* Add provider registration tests */
+.test_provider { @apply rounded-xl p-5 bg-white border border-gray-200 transition-all; }
+.test_provider:hover { @apply shadow-md border-gray-300; }
+.test_provider--active { @apply border-primary-500 ring-2 ring-primary-500/20; }
+.test_provider__header { @apply flex items-center justify-between mb-4; }
