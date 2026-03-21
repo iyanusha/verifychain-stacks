@@ -205,3 +205,5 @@ export const COMMITMENT_DASHBOARD_S29 = { pageSize: 20 } as const;
 export const COMMITMENT_DASHBOARD_S39 = { pageSize: 20 } as const;
 
 export const COMMITMENT_DASHBOARD_S49 = { pageSize: 20 } as const;
+
+export const STAKE_ANALYTICS_S9 = { pageSize: 20 } as const;
