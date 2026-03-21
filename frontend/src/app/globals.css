@@ -188,3 +188,9 @@ body {
 .test_provider:hover { @apply shadow-md border-gray-300; }
 .test_provider--active { @apply border-primary-500 ring-2 ring-primary-500/20; }
 .test_provider__header { @apply flex items-center justify-between mb-4; }
+
+/* Add commitment creation tests */
+.test_commitment { @apply rounded-xl p-5 bg-white border border-gray-200 transition-all; }
+.test_commitment:hover { @apply shadow-md border-gray-300; }
+.test_commitment--active { @apply border-primary-500 ring-2 ring-primary-500/20; }
+.test_commitment__header { @apply flex items-center justify-between mb-4; }
