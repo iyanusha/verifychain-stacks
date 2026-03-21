@@ -57,3 +57,5 @@ export const STAKE_MANAGEMENT_CONFIG = { refreshMs: 30000, retries: 3 } as const
 
 export const WITHDRAWAL_UI_CONFIG = { refreshMs: 30000, retries: 3 } as const;
 
+
+export const DASHBOARD_PAGE_CONFIG = { refreshMs: 30000, retries: 3 } as const;
