@@ -988,3 +988,7 @@ body {
 .network_graph-sec16 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
 .network_graph-sec16 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
 .network_graph-sec16 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.network_graph-sec17 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.network_graph-sec17 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.network_graph-sec17 .metric { @apply text-2xl font-bold text-indigo-600; }
