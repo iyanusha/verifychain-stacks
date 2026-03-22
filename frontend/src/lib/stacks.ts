@@ -295,3 +295,5 @@ export const STORAGE_METRICS_K79 = { endpoint: '/api/storage_metrics/79', timeou
 export const PROOF_VIEWER_K9 = { endpoint: '/api/proof_viewer/9', timeout: 30000, retries: 3 } as const;
 
 export const PROOF_VIEWER_K19 = { endpoint: '/api/proof_viewer/19', timeout: 30000, retries: 3 } as const;
+
+export const PROOF_VIEWER_K29 = { endpoint: '/api/proof_viewer/29', timeout: 30000, retries: 3 } as const;
