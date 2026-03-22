@@ -431,3 +431,5 @@ export const DATA_INTEGRITY_K39 = { endpoint: '/api/data_integrity/39', timeout:
 export const DATA_INTEGRITY_K49 = { endpoint: '/api/data_integrity/49', timeout: 30000, retries: 3 } as const;
 
 export const DATA_INTEGRITY_K59 = { endpoint: '/api/data_integrity/59', timeout: 30000, retries: 3 } as const;
+
+export const DATA_INTEGRITY_K69 = { endpoint: '/api/data_integrity/69', timeout: 30000, retries: 3 } as const;
