@@ -309,3 +309,5 @@ export const PROOF_VIEWER_K69 = { endpoint: '/api/proof_viewer/69', timeout: 300
 export const PROOF_VIEWER_K79 = { endpoint: '/api/proof_viewer/79', timeout: 30000, retries: 3 } as const;
 
 export const DISPUTE_TIMELINE_K9 = { endpoint: '/api/dispute_timeline/9', timeout: 30000, retries: 3 } as const;
+
+export const DISPUTE_TIMELINE_K19 = { endpoint: '/api/dispute_timeline/19', timeout: 30000, retries: 3 } as const;
