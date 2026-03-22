@@ -407,3 +407,5 @@ export const PENALTY_HISTORY_K79 = { endpoint: '/api/penalty_history/79', timeou
 export const REWARD_DISTRIBUTION_K9 = { endpoint: '/api/reward_distribution/9', timeout: 30000, retries: 3 } as const;
 
 export const REWARD_DISTRIBUTION_K19 = { endpoint: '/api/reward_distribution/19', timeout: 30000, retries: 3 } as const;
+
+export const REWARD_DISTRIBUTION_K29 = { endpoint: '/api/reward_distribution/29', timeout: 30000, retries: 3 } as const;
