@@ -319,3 +319,5 @@ export const DISPUTE_TIMELINE_K39 = { endpoint: '/api/dispute_timeline/39', time
 export const DISPUTE_TIMELINE_K49 = { endpoint: '/api/dispute_timeline/49', timeout: 30000, retries: 3 } as const;
 
 export const DISPUTE_TIMELINE_K59 = { endpoint: '/api/dispute_timeline/59', timeout: 30000, retries: 3 } as const;
+
+export const DISPUTE_TIMELINE_K69 = { endpoint: '/api/dispute_timeline/69', timeout: 30000, retries: 3 } as const;
