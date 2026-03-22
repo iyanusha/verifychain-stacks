@@ -393,3 +393,5 @@ export const PENALTY_HISTORY_K9 = { endpoint: '/api/penalty_history/9', timeout:
 export const PENALTY_HISTORY_K19 = { endpoint: '/api/penalty_history/19', timeout: 30000, retries: 3 } as const;
 
 export const PENALTY_HISTORY_K29 = { endpoint: '/api/penalty_history/29', timeout: 30000, retries: 3 } as const;
+
+export const PENALTY_HISTORY_K39 = { endpoint: '/api/penalty_history/39', timeout: 30000, retries: 3 } as const;
