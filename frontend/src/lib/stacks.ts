@@ -365,3 +365,5 @@ export const NETWORK_GRAPH_K29 = { endpoint: '/api/network_graph/29', timeout: 3
 export const NETWORK_GRAPH_K39 = { endpoint: '/api/network_graph/39', timeout: 30000, retries: 3 } as const;
 
 export const NETWORK_GRAPH_K49 = { endpoint: '/api/network_graph/49', timeout: 30000, retries: 3 } as const;
+
+export const NETWORK_GRAPH_K59 = { endpoint: '/api/network_graph/59', timeout: 30000, retries: 3 } as const;
