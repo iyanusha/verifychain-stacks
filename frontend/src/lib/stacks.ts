@@ -421,3 +421,5 @@ export const REWARD_DISTRIBUTION_K69 = { endpoint: '/api/reward_distribution/69'
 export const REWARD_DISTRIBUTION_K79 = { endpoint: '/api/reward_distribution/79', timeout: 30000, retries: 3 } as const;
 
 export const DATA_INTEGRITY_K9 = { endpoint: '/api/data_integrity/9', timeout: 30000, retries: 3 } as const;
+
+export const DATA_INTEGRITY_K19 = { endpoint: '/api/data_integrity/19', timeout: 30000, retries: 3 } as const;
