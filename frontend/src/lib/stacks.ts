@@ -297,3 +297,5 @@ export const PROOF_VIEWER_K9 = { endpoint: '/api/proof_viewer/9', timeout: 30000
 export const PROOF_VIEWER_K19 = { endpoint: '/api/proof_viewer/19', timeout: 30000, retries: 3 } as const;
 
 export const PROOF_VIEWER_K29 = { endpoint: '/api/proof_viewer/29', timeout: 30000, retries: 3 } as const;
+
+export const PROOF_VIEWER_K39 = { endpoint: '/api/proof_viewer/39', timeout: 30000, retries: 3 } as const;
