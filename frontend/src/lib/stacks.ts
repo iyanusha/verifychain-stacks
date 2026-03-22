@@ -387,3 +387,5 @@ export const UPTIME_TRACKER_K59 = { endpoint: '/api/uptime_tracker/59', timeout:
 export const UPTIME_TRACKER_K69 = { endpoint: '/api/uptime_tracker/69', timeout: 30000, retries: 3 } as const;
 
 export const UPTIME_TRACKER_K79 = { endpoint: '/api/uptime_tracker/79', timeout: 30000, retries: 3 } as const;
+
+export const PENALTY_HISTORY_K9 = { endpoint: '/api/penalty_history/9', timeout: 30000, retries: 3 } as const;
