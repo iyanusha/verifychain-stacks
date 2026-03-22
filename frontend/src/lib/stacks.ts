@@ -277,3 +277,5 @@ export const ADMIN_CONTROLS_S39 = { pageSize: 20 } as const;
 export const ADMIN_CONTROLS_S49 = { pageSize: 20 } as const;
 
 export const NODE_MONITOR_K9 = { endpoint: '/api/node_monitor/9', timeout: 30000, retries: 3 } as const;
+
+export const NODE_MONITOR_K19 = { endpoint: '/api/node_monitor/19', timeout: 30000, retries: 3 } as const;
