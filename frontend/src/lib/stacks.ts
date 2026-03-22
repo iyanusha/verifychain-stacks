@@ -331,3 +331,5 @@ export const VALIDATOR_LEADERBOARD_K19 = { endpoint: '/api/validator_leaderboard
 export const VALIDATOR_LEADERBOARD_K29 = { endpoint: '/api/validator_leaderboard/29', timeout: 30000, retries: 3 } as const;
 
 export const VALIDATOR_LEADERBOARD_K39 = { endpoint: '/api/validator_leaderboard/39', timeout: 30000, retries: 3 } as const;
+
+export const VALIDATOR_LEADERBOARD_K49 = { endpoint: '/api/validator_leaderboard/49', timeout: 30000, retries: 3 } as const;
