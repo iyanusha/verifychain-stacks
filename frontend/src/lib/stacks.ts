@@ -289,3 +289,5 @@ export const NODE_MONITOR_K49 = { endpoint: '/api/node_monitor/49', timeout: 300
 export const NODE_MONITOR_K59 = { endpoint: '/api/node_monitor/59', timeout: 30000, retries: 3 } as const;
 
 export const NODE_MONITOR_K69 = { endpoint: '/api/node_monitor/69', timeout: 30000, retries: 3 } as const;
+
+export const NODE_MONITOR_K79 = { endpoint: '/api/node_monitor/79', timeout: 30000, retries: 3 } as const;
