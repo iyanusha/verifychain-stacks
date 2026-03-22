@@ -417,3 +417,5 @@ export const REWARD_DISTRIBUTION_K49 = { endpoint: '/api/reward_distribution/49'
 export const REWARD_DISTRIBUTION_K59 = { endpoint: '/api/reward_distribution/59', timeout: 30000, retries: 3 } as const;
 
 export const REWARD_DISTRIBUTION_K69 = { endpoint: '/api/reward_distribution/69', timeout: 30000, retries: 3 } as const;
+
+export const REWARD_DISTRIBUTION_K79 = { endpoint: '/api/reward_distribution/79', timeout: 30000, retries: 3 } as const;
