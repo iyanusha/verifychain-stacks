@@ -345,3 +345,5 @@ export const CHUNK_BROWSER_K9 = { endpoint: '/api/chunk_browser/9', timeout: 300
 export const CHUNK_BROWSER_K19 = { endpoint: '/api/chunk_browser/19', timeout: 30000, retries: 3 } as const;
 
 export const CHUNK_BROWSER_K29 = { endpoint: '/api/chunk_browser/29', timeout: 30000, retries: 3 } as const;
+
+export const CHUNK_BROWSER_K39 = { endpoint: '/api/chunk_browser/39', timeout: 30000, retries: 3 } as const;
