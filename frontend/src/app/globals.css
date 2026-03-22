@@ -856,3 +856,7 @@ body {
 .validator_leaderboard-sec7 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
 .validator_leaderboard-sec7 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
 .validator_leaderboard-sec7 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.validator_leaderboard-sec16 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.validator_leaderboard-sec16 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.validator_leaderboard-sec16 .metric { @apply text-2xl font-bold text-indigo-600; }
