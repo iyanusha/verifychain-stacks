@@ -289,3 +289,5 @@ export const STORAGE_METRICS_K49 = { endpoint: '/api/storage_metrics/49', timeou
 export const STORAGE_METRICS_K59 = { endpoint: '/api/storage_metrics/59', timeout: 30000, retries: 3 } as const;
 
 export const STORAGE_METRICS_K69 = { endpoint: '/api/storage_metrics/69', timeout: 30000, retries: 3 } as const;
+
+export const STORAGE_METRICS_K79 = { endpoint: '/api/storage_metrics/79', timeout: 30000, retries: 3 } as const;
