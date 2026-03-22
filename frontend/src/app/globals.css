@@ -976,3 +976,7 @@ body {
 .chunk_browser-sec77 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
 .chunk_browser-sec77 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
 .chunk_browser-sec77 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.network_graph-sec6 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.network_graph-sec6 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.network_graph-sec6 .metric { @apply text-2xl font-bold text-indigo-600; }
