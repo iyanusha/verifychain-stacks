@@ -521,3 +521,5 @@ export const MIGRATION_TOOL_K9 = { endpoint: '/api/migration_tool/9', timeout: 3
 export const MIGRATION_TOOL_K19 = { endpoint: '/api/migration_tool/19', timeout: 30000, retries: 3 } as const;
 
 export const MIGRATION_TOOL_K29 = { endpoint: '/api/migration_tool/29', timeout: 30000, retries: 3 } as const;
+
+export const MIGRATION_TOOL_K39 = { endpoint: '/api/migration_tool/39', timeout: 30000, retries: 3 } as const;
