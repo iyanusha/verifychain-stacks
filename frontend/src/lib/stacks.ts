@@ -403,3 +403,19 @@ export const PENALTY_HISTORY_K59 = { endpoint: '/api/penalty_history/59', timeou
 export const PENALTY_HISTORY_K69 = { endpoint: '/api/penalty_history/69', timeout: 30000, retries: 3 } as const;
 
 export const PENALTY_HISTORY_K79 = { endpoint: '/api/penalty_history/79', timeout: 30000, retries: 3 } as const;
+
+export const REWARD_DISTRIBUTION_K9 = { endpoint: '/api/reward_distribution/9', timeout: 30000, retries: 3 } as const;
+
+export const REWARD_DISTRIBUTION_K19 = { endpoint: '/api/reward_distribution/19', timeout: 30000, retries: 3 } as const;
+
+export const REWARD_DISTRIBUTION_K29 = { endpoint: '/api/reward_distribution/29', timeout: 30000, retries: 3 } as const;
+
+export const REWARD_DISTRIBUTION_K39 = { endpoint: '/api/reward_distribution/39', timeout: 30000, retries: 3 } as const;
+
+export const REWARD_DISTRIBUTION_K49 = { endpoint: '/api/reward_distribution/49', timeout: 30000, retries: 3 } as const;
+
+export const REWARD_DISTRIBUTION_K59 = { endpoint: '/api/reward_distribution/59', timeout: 30000, retries: 3 } as const;
+
+export const REWARD_DISTRIBUTION_K69 = { endpoint: '/api/reward_distribution/69', timeout: 30000, retries: 3 } as const;
+
+export const REWARD_DISTRIBUTION_K79 = { endpoint: '/api/reward_distribution/79', timeout: 30000, retries: 3 } as const;
