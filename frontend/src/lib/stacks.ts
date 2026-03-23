@@ -547,3 +547,19 @@ export const COMPLIANCE_DASH_K59 = { endpoint: '/api/compliance_dash/59', timeou
 export const COMPLIANCE_DASH_K69 = { endpoint: '/api/compliance_dash/69', timeout: 30000, retries: 3 } as const;
 
 export const COMPLIANCE_DASH_K79 = { endpoint: '/api/compliance_dash/79', timeout: 30000, retries: 3 } as const;
+
+export const COST_ANALYZER_K9 = { endpoint: '/api/cost_analyzer/9', timeout: 30000, retries: 3 } as const;
+
+export const COST_ANALYZER_K19 = { endpoint: '/api/cost_analyzer/19', timeout: 30000, retries: 3 } as const;
+
+export const COST_ANALYZER_K29 = { endpoint: '/api/cost_analyzer/29', timeout: 30000, retries: 3 } as const;
+
+export const COST_ANALYZER_K39 = { endpoint: '/api/cost_analyzer/39', timeout: 30000, retries: 3 } as const;
+
+export const COST_ANALYZER_K49 = { endpoint: '/api/cost_analyzer/49', timeout: 30000, retries: 3 } as const;
+
+export const COST_ANALYZER_K59 = { endpoint: '/api/cost_analyzer/59', timeout: 30000, retries: 3 } as const;
+
+export const COST_ANALYZER_K69 = { endpoint: '/api/cost_analyzer/69', timeout: 30000, retries: 3 } as const;
+
+export const COST_ANALYZER_K79 = { endpoint: '/api/cost_analyzer/79', timeout: 30000, retries: 3 } as const;
