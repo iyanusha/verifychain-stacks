@@ -419,3 +419,19 @@ export const REWARD_DISTRIBUTION_K59 = { endpoint: '/api/reward_distribution/59'
 export const REWARD_DISTRIBUTION_K69 = { endpoint: '/api/reward_distribution/69', timeout: 30000, retries: 3 } as const;
 
 export const REWARD_DISTRIBUTION_K79 = { endpoint: '/api/reward_distribution/79', timeout: 30000, retries: 3 } as const;
+
+export const DATA_INTEGRITY_K9 = { endpoint: '/api/data_integrity/9', timeout: 30000, retries: 3 } as const;
+
+export const DATA_INTEGRITY_K19 = { endpoint: '/api/data_integrity/19', timeout: 30000, retries: 3 } as const;
+
+export const DATA_INTEGRITY_K29 = { endpoint: '/api/data_integrity/29', timeout: 30000, retries: 3 } as const;
+
+export const DATA_INTEGRITY_K39 = { endpoint: '/api/data_integrity/39', timeout: 30000, retries: 3 } as const;
+
+export const DATA_INTEGRITY_K49 = { endpoint: '/api/data_integrity/49', timeout: 30000, retries: 3 } as const;
+
+export const DATA_INTEGRITY_K59 = { endpoint: '/api/data_integrity/59', timeout: 30000, retries: 3 } as const;
+
+export const DATA_INTEGRITY_K69 = { endpoint: '/api/data_integrity/69', timeout: 30000, retries: 3 } as const;
+
+export const DATA_INTEGRITY_K79 = { endpoint: '/api/data_integrity/79', timeout: 30000, retries: 3 } as const;
