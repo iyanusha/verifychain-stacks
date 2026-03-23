@@ -483,3 +483,19 @@ export const CAPACITY_PLANNER_K59 = { endpoint: '/api/capacity_planner/59', time
 export const CAPACITY_PLANNER_K69 = { endpoint: '/api/capacity_planner/69', timeout: 30000, retries: 3 } as const;
 
 export const CAPACITY_PLANNER_K79 = { endpoint: '/api/capacity_planner/79', timeout: 30000, retries: 3 } as const;
+
+export const SLA_MONITOR_K9 = { endpoint: '/api/sla_monitor/9', timeout: 30000, retries: 3 } as const;
+
+export const SLA_MONITOR_K19 = { endpoint: '/api/sla_monitor/19', timeout: 30000, retries: 3 } as const;
+
+export const SLA_MONITOR_K29 = { endpoint: '/api/sla_monitor/29', timeout: 30000, retries: 3 } as const;
+
+export const SLA_MONITOR_K39 = { endpoint: '/api/sla_monitor/39', timeout: 30000, retries: 3 } as const;
+
+export const SLA_MONITOR_K49 = { endpoint: '/api/sla_monitor/49', timeout: 30000, retries: 3 } as const;
+
+export const SLA_MONITOR_K59 = { endpoint: '/api/sla_monitor/59', timeout: 30000, retries: 3 } as const;
+
+export const SLA_MONITOR_K69 = { endpoint: '/api/sla_monitor/69', timeout: 30000, retries: 3 } as const;
+
+export const SLA_MONITOR_K79 = { endpoint: '/api/sla_monitor/79', timeout: 30000, retries: 3 } as const;
