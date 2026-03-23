@@ -339,3 +339,19 @@ export const VALIDATOR_LEADERBOARD_K59 = { endpoint: '/api/validator_leaderboard
 export const VALIDATOR_LEADERBOARD_K69 = { endpoint: '/api/validator_leaderboard/69', timeout: 30000, retries: 3 } as const;
 
 export const VALIDATOR_LEADERBOARD_K79 = { endpoint: '/api/validator_leaderboard/79', timeout: 30000, retries: 3 } as const;
+
+export const CHUNK_BROWSER_K9 = { endpoint: '/api/chunk_browser/9', timeout: 30000, retries: 3 } as const;
+
+export const CHUNK_BROWSER_K19 = { endpoint: '/api/chunk_browser/19', timeout: 30000, retries: 3 } as const;
+
+export const CHUNK_BROWSER_K29 = { endpoint: '/api/chunk_browser/29', timeout: 30000, retries: 3 } as const;
+
+export const CHUNK_BROWSER_K39 = { endpoint: '/api/chunk_browser/39', timeout: 30000, retries: 3 } as const;
+
+export const CHUNK_BROWSER_K49 = { endpoint: '/api/chunk_browser/49', timeout: 30000, retries: 3 } as const;
+
+export const CHUNK_BROWSER_K59 = { endpoint: '/api/chunk_browser/59', timeout: 30000, retries: 3 } as const;
+
+export const CHUNK_BROWSER_K69 = { endpoint: '/api/chunk_browser/69', timeout: 30000, retries: 3 } as const;
+
+export const CHUNK_BROWSER_K79 = { endpoint: '/api/chunk_browser/79', timeout: 30000, retries: 3 } as const;
