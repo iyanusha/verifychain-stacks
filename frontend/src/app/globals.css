@@ -1736,3 +1736,7 @@ body {
 .compliance_dash-sec67 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
 .compliance_dash-sec67 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
 .compliance_dash-sec67 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.compliance_dash-sec76 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.compliance_dash-sec76 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.compliance_dash-sec76 .metric { @apply text-2xl font-bold text-indigo-600; }
