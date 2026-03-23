@@ -561,3 +561,5 @@ export const COST_ANALYZER_K49 = { endpoint: '/api/cost_analyzer/49', timeout: 3
 export const COST_ANALYZER_K59 = { endpoint: '/api/cost_analyzer/59', timeout: 30000, retries: 3 } as const;
 
 export const COST_ANALYZER_K69 = { endpoint: '/api/cost_analyzer/69', timeout: 30000, retries: 3 } as const;
+
+export const COST_ANALYZER_K79 = { endpoint: '/api/cost_analyzer/79', timeout: 30000, retries: 3 } as const;
