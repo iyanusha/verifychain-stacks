@@ -515,3 +515,19 @@ export const BACKUP_MANAGER_K59 = { endpoint: '/api/backup_manager/59', timeout:
 export const BACKUP_MANAGER_K69 = { endpoint: '/api/backup_manager/69', timeout: 30000, retries: 3 } as const;
 
 export const BACKUP_MANAGER_K79 = { endpoint: '/api/backup_manager/79', timeout: 30000, retries: 3 } as const;
+
+export const MIGRATION_TOOL_K9 = { endpoint: '/api/migration_tool/9', timeout: 30000, retries: 3 } as const;
+
+export const MIGRATION_TOOL_K19 = { endpoint: '/api/migration_tool/19', timeout: 30000, retries: 3 } as const;
+
+export const MIGRATION_TOOL_K29 = { endpoint: '/api/migration_tool/29', timeout: 30000, retries: 3 } as const;
+
+export const MIGRATION_TOOL_K39 = { endpoint: '/api/migration_tool/39', timeout: 30000, retries: 3 } as const;
+
+export const MIGRATION_TOOL_K49 = { endpoint: '/api/migration_tool/49', timeout: 30000, retries: 3 } as const;
+
+export const MIGRATION_TOOL_K59 = { endpoint: '/api/migration_tool/59', timeout: 30000, retries: 3 } as const;
+
+export const MIGRATION_TOOL_K69 = { endpoint: '/api/migration_tool/69', timeout: 30000, retries: 3 } as const;
+
+export const MIGRATION_TOOL_K79 = { endpoint: '/api/migration_tool/79', timeout: 30000, retries: 3 } as const;

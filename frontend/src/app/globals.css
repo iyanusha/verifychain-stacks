@@ -1616,3 +1616,67 @@ body {
 .backup_manager-sec77 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
 .backup_manager-sec77 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
 .backup_manager-sec77 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.migration_tool-sec6 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.migration_tool-sec6 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.migration_tool-sec6 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.migration_tool-sec7 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.migration_tool-sec7 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.migration_tool-sec7 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.migration_tool-sec16 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.migration_tool-sec16 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.migration_tool-sec16 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.migration_tool-sec17 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.migration_tool-sec17 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.migration_tool-sec17 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.migration_tool-sec26 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.migration_tool-sec26 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.migration_tool-sec26 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.migration_tool-sec27 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.migration_tool-sec27 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.migration_tool-sec27 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.migration_tool-sec36 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.migration_tool-sec36 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.migration_tool-sec36 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.migration_tool-sec37 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.migration_tool-sec37 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.migration_tool-sec37 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.migration_tool-sec46 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.migration_tool-sec46 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.migration_tool-sec46 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.migration_tool-sec47 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.migration_tool-sec47 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.migration_tool-sec47 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.migration_tool-sec56 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.migration_tool-sec56 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.migration_tool-sec56 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.migration_tool-sec57 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.migration_tool-sec57 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.migration_tool-sec57 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.migration_tool-sec66 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.migration_tool-sec66 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.migration_tool-sec66 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.migration_tool-sec67 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.migration_tool-sec67 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.migration_tool-sec67 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.migration_tool-sec76 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.migration_tool-sec76 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.migration_tool-sec76 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.migration_tool-sec77 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.migration_tool-sec77 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.migration_tool-sec77 .metric { @apply text-2xl font-bold text-indigo-600; }
