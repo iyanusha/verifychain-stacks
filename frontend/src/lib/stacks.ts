@@ -499,3 +499,19 @@ export const SLA_MONITOR_K59 = { endpoint: '/api/sla_monitor/59', timeout: 30000
 export const SLA_MONITOR_K69 = { endpoint: '/api/sla_monitor/69', timeout: 30000, retries: 3 } as const;
 
 export const SLA_MONITOR_K79 = { endpoint: '/api/sla_monitor/79', timeout: 30000, retries: 3 } as const;
+
+export const BACKUP_MANAGER_K9 = { endpoint: '/api/backup_manager/9', timeout: 30000, retries: 3 } as const;
+
+export const BACKUP_MANAGER_K19 = { endpoint: '/api/backup_manager/19', timeout: 30000, retries: 3 } as const;
+
+export const BACKUP_MANAGER_K29 = { endpoint: '/api/backup_manager/29', timeout: 30000, retries: 3 } as const;
+
+export const BACKUP_MANAGER_K39 = { endpoint: '/api/backup_manager/39', timeout: 30000, retries: 3 } as const;
+
+export const BACKUP_MANAGER_K49 = { endpoint: '/api/backup_manager/49', timeout: 30000, retries: 3 } as const;
+
+export const BACKUP_MANAGER_K59 = { endpoint: '/api/backup_manager/59', timeout: 30000, retries: 3 } as const;
+
+export const BACKUP_MANAGER_K69 = { endpoint: '/api/backup_manager/69', timeout: 30000, retries: 3 } as const;
+
+export const BACKUP_MANAGER_K79 = { endpoint: '/api/backup_manager/79', timeout: 30000, retries: 3 } as const;
