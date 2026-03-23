@@ -551,3 +551,5 @@ export const COMPLIANCE_DASH_K79 = { endpoint: '/api/compliance_dash/79', timeou
 export const COST_ANALYZER_K9 = { endpoint: '/api/cost_analyzer/9', timeout: 30000, retries: 3 } as const;
 
 export const COST_ANALYZER_K19 = { endpoint: '/api/cost_analyzer/19', timeout: 30000, retries: 3 } as const;
+
+export const COST_ANALYZER_K29 = { endpoint: '/api/cost_analyzer/29', timeout: 30000, retries: 3 } as const;
