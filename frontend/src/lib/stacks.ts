@@ -481,3 +481,5 @@ export const CAPACITY_PLANNER_K49 = { endpoint: '/api/capacity_planner/49', time
 export const CAPACITY_PLANNER_K59 = { endpoint: '/api/capacity_planner/59', timeout: 30000, retries: 3 } as const;
 
 export const CAPACITY_PLANNER_K69 = { endpoint: '/api/capacity_planner/69', timeout: 30000, retries: 3 } as const;
+
+export const CAPACITY_PLANNER_K79 = { endpoint: '/api/capacity_planner/79', timeout: 30000, retries: 3 } as const;
