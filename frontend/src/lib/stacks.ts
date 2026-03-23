@@ -323,3 +323,19 @@ export const DISPUTE_TIMELINE_K59 = { endpoint: '/api/dispute_timeline/59', time
 export const DISPUTE_TIMELINE_K69 = { endpoint: '/api/dispute_timeline/69', timeout: 30000, retries: 3 } as const;
 
 export const DISPUTE_TIMELINE_K79 = { endpoint: '/api/dispute_timeline/79', timeout: 30000, retries: 3 } as const;
+
+export const VALIDATOR_LEADERBOARD_K9 = { endpoint: '/api/validator_leaderboard/9', timeout: 30000, retries: 3 } as const;
+
+export const VALIDATOR_LEADERBOARD_K19 = { endpoint: '/api/validator_leaderboard/19', timeout: 30000, retries: 3 } as const;
+
+export const VALIDATOR_LEADERBOARD_K29 = { endpoint: '/api/validator_leaderboard/29', timeout: 30000, retries: 3 } as const;
+
+export const VALIDATOR_LEADERBOARD_K39 = { endpoint: '/api/validator_leaderboard/39', timeout: 30000, retries: 3 } as const;
+
+export const VALIDATOR_LEADERBOARD_K49 = { endpoint: '/api/validator_leaderboard/49', timeout: 30000, retries: 3 } as const;
+
+export const VALIDATOR_LEADERBOARD_K59 = { endpoint: '/api/validator_leaderboard/59', timeout: 30000, retries: 3 } as const;
+
+export const VALIDATOR_LEADERBOARD_K69 = { endpoint: '/api/validator_leaderboard/69', timeout: 30000, retries: 3 } as const;
+
+export const VALIDATOR_LEADERBOARD_K79 = { endpoint: '/api/validator_leaderboard/79', timeout: 30000, retries: 3 } as const;
