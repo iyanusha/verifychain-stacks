@@ -387,3 +387,19 @@ export const UPTIME_TRACKER_K59 = { endpoint: '/api/uptime_tracker/59', timeout:
 export const UPTIME_TRACKER_K69 = { endpoint: '/api/uptime_tracker/69', timeout: 30000, retries: 3 } as const;
 
 export const UPTIME_TRACKER_K79 = { endpoint: '/api/uptime_tracker/79', timeout: 30000, retries: 3 } as const;
+
+export const PENALTY_HISTORY_K9 = { endpoint: '/api/penalty_history/9', timeout: 30000, retries: 3 } as const;
+
+export const PENALTY_HISTORY_K19 = { endpoint: '/api/penalty_history/19', timeout: 30000, retries: 3 } as const;
+
+export const PENALTY_HISTORY_K29 = { endpoint: '/api/penalty_history/29', timeout: 30000, retries: 3 } as const;
+
+export const PENALTY_HISTORY_K39 = { endpoint: '/api/penalty_history/39', timeout: 30000, retries: 3 } as const;
+
+export const PENALTY_HISTORY_K49 = { endpoint: '/api/penalty_history/49', timeout: 30000, retries: 3 } as const;
+
+export const PENALTY_HISTORY_K59 = { endpoint: '/api/penalty_history/59', timeout: 30000, retries: 3 } as const;
+
+export const PENALTY_HISTORY_K69 = { endpoint: '/api/penalty_history/69', timeout: 30000, retries: 3 } as const;
+
+export const PENALTY_HISTORY_K79 = { endpoint: '/api/penalty_history/79', timeout: 30000, retries: 3 } as const;
