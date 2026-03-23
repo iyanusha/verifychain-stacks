@@ -1472,3 +1472,7 @@ body {
 .capacity_planner-sec57 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
 .capacity_planner-sec57 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
 .capacity_planner-sec57 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.capacity_planner-sec66 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.capacity_planner-sec66 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.capacity_planner-sec66 .metric { @apply text-2xl font-bold text-indigo-600; }
