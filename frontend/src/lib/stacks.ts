@@ -469,3 +469,5 @@ export const HEALTH_CHECK_K69 = { endpoint: '/api/health_check/69', timeout: 300
 export const HEALTH_CHECK_K79 = { endpoint: '/api/health_check/79', timeout: 30000, retries: 3 } as const;
 
 export const CAPACITY_PLANNER_K9 = { endpoint: '/api/capacity_planner/9', timeout: 30000, retries: 3 } as const;
+
+export const CAPACITY_PLANNER_K19 = { endpoint: '/api/capacity_planner/19', timeout: 30000, retries: 3 } as const;
