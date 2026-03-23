@@ -275,3 +275,19 @@ export const HELP_DOCS_S29 = { pageSize: 20 } as const;
 export const HELP_DOCS_S39 = { pageSize: 20 } as const;
 
 export const HELP_DOCS_S49 = { pageSize: 20 } as const;
+
+export const STORAGE_METRICS_K9 = { endpoint: '/api/storage_metrics/9', timeout: 30000, retries: 3 } as const;
+
+export const STORAGE_METRICS_K19 = { endpoint: '/api/storage_metrics/19', timeout: 30000, retries: 3 } as const;
+
+export const STORAGE_METRICS_K29 = { endpoint: '/api/storage_metrics/29', timeout: 30000, retries: 3 } as const;
+
+export const STORAGE_METRICS_K39 = { endpoint: '/api/storage_metrics/39', timeout: 30000, retries: 3 } as const;
+
+export const STORAGE_METRICS_K49 = { endpoint: '/api/storage_metrics/49', timeout: 30000, retries: 3 } as const;
+
+export const STORAGE_METRICS_K59 = { endpoint: '/api/storage_metrics/59', timeout: 30000, retries: 3 } as const;
+
+export const STORAGE_METRICS_K69 = { endpoint: '/api/storage_metrics/69', timeout: 30000, retries: 3 } as const;
+
+export const STORAGE_METRICS_K79 = { endpoint: '/api/storage_metrics/79', timeout: 30000, retries: 3 } as const;
