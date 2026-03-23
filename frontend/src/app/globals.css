@@ -1308,3 +1308,7 @@ body {
 .audit_log-sec16 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
 .audit_log-sec16 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
 .audit_log-sec16 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.audit_log-sec17 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.audit_log-sec17 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.audit_log-sec17 .metric { @apply text-2xl font-bold text-indigo-600; }
