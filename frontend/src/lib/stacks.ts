@@ -575,3 +575,5 @@ export const OPS_CONSOLE_K39 = { endpoint: '/api/ops_console/39', timeout: 30000
 export const OPS_CONSOLE_K49 = { endpoint: '/api/ops_console/49', timeout: 30000, retries: 3 } as const;
 
 export const OPS_CONSOLE_K59 = { endpoint: '/api/ops_console/59', timeout: 30000, retries: 3 } as const;
+
+export const OPS_CONSOLE_K69 = { endpoint: '/api/ops_console/69', timeout: 30000, retries: 3 } as const;
