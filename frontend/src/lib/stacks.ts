@@ -533,3 +533,5 @@ export const MIGRATION_TOOL_K69 = { endpoint: '/api/migration_tool/69', timeout:
 export const MIGRATION_TOOL_K79 = { endpoint: '/api/migration_tool/79', timeout: 30000, retries: 3 } as const;
 
 export const COMPLIANCE_DASH_K9 = { endpoint: '/api/compliance_dash/9', timeout: 30000, retries: 3 } as const;
+
+export const COMPLIANCE_DASH_K19 = { endpoint: '/api/compliance_dash/19', timeout: 30000, retries: 3 } as const;
