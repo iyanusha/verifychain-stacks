@@ -459,3 +459,5 @@ export const HEALTH_CHECK_K19 = { endpoint: '/api/health_check/19', timeout: 300
 export const HEALTH_CHECK_K29 = { endpoint: '/api/health_check/29', timeout: 30000, retries: 3 } as const;
 
 export const HEALTH_CHECK_K39 = { endpoint: '/api/health_check/39', timeout: 30000, retries: 3 } as const;
+
+export const HEALTH_CHECK_K49 = { endpoint: '/api/health_check/49', timeout: 30000, retries: 3 } as const;
