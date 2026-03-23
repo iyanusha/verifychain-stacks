@@ -543,3 +543,5 @@ export const COMPLIANCE_DASH_K39 = { endpoint: '/api/compliance_dash/39', timeou
 export const COMPLIANCE_DASH_K49 = { endpoint: '/api/compliance_dash/49', timeout: 30000, retries: 3 } as const;
 
 export const COMPLIANCE_DASH_K59 = { endpoint: '/api/compliance_dash/59', timeout: 30000, retries: 3 } as const;
+
+export const COMPLIANCE_DASH_K69 = { endpoint: '/api/compliance_dash/69', timeout: 30000, retries: 3 } as const;
