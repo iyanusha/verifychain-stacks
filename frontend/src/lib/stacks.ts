@@ -443,3 +443,5 @@ export const AUDIT_LOG_K19 = { endpoint: '/api/audit_log/19', timeout: 30000, re
 export const AUDIT_LOG_K29 = { endpoint: '/api/audit_log/29', timeout: 30000, retries: 3 } as const;
 
 export const AUDIT_LOG_K39 = { endpoint: '/api/audit_log/39', timeout: 30000, retries: 3 } as const;
+
+export const AUDIT_LOG_K49 = { endpoint: '/api/audit_log/49', timeout: 30000, retries: 3 } as const;
