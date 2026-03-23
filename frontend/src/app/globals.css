@@ -1548,3 +1548,7 @@ body {
 .sla_monitor-sec76 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
 .sla_monitor-sec76 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
 .sla_monitor-sec76 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.sla_monitor-sec77 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.sla_monitor-sec77 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.sla_monitor-sec77 .metric { @apply text-2xl font-bold text-indigo-600; }
