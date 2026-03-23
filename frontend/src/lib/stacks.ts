@@ -291,3 +291,19 @@ export const STORAGE_METRICS_K59 = { endpoint: '/api/storage_metrics/59', timeou
 export const STORAGE_METRICS_K69 = { endpoint: '/api/storage_metrics/69', timeout: 30000, retries: 3 } as const;
 
 export const STORAGE_METRICS_K79 = { endpoint: '/api/storage_metrics/79', timeout: 30000, retries: 3 } as const;
+
+export const PROOF_VIEWER_K9 = { endpoint: '/api/proof_viewer/9', timeout: 30000, retries: 3 } as const;
+
+export const PROOF_VIEWER_K19 = { endpoint: '/api/proof_viewer/19', timeout: 30000, retries: 3 } as const;
+
+export const PROOF_VIEWER_K29 = { endpoint: '/api/proof_viewer/29', timeout: 30000, retries: 3 } as const;
+
+export const PROOF_VIEWER_K39 = { endpoint: '/api/proof_viewer/39', timeout: 30000, retries: 3 } as const;
+
+export const PROOF_VIEWER_K49 = { endpoint: '/api/proof_viewer/49', timeout: 30000, retries: 3 } as const;
+
+export const PROOF_VIEWER_K59 = { endpoint: '/api/proof_viewer/59', timeout: 30000, retries: 3 } as const;
+
+export const PROOF_VIEWER_K69 = { endpoint: '/api/proof_viewer/69', timeout: 30000, retries: 3 } as const;
+
+export const PROOF_VIEWER_K79 = { endpoint: '/api/proof_viewer/79', timeout: 30000, retries: 3 } as const;
