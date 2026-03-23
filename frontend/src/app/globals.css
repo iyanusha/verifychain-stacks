@@ -1816,3 +1816,7 @@ body {
 .ops_console-sec7 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
 .ops_console-sec7 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
 .ops_console-sec7 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.ops_console-sec16 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.ops_console-sec16 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.ops_console-sec16 .metric { @apply text-2xl font-bold text-indigo-600; }
