@@ -567,3 +567,5 @@ export const COST_ANALYZER_K79 = { endpoint: '/api/cost_analyzer/79', timeout: 3
 export const OPS_CONSOLE_K9 = { endpoint: '/api/ops_console/9', timeout: 30000, retries: 3 } as const;
 
 export const OPS_CONSOLE_K19 = { endpoint: '/api/ops_console/19', timeout: 30000, retries: 3 } as const;
+
+export const OPS_CONSOLE_K29 = { endpoint: '/api/ops_console/29', timeout: 30000, retries: 3 } as const;
