@@ -355,3 +355,19 @@ export const CHUNK_BROWSER_K59 = { endpoint: '/api/chunk_browser/59', timeout: 3
 export const CHUNK_BROWSER_K69 = { endpoint: '/api/chunk_browser/69', timeout: 30000, retries: 3 } as const;
 
 export const CHUNK_BROWSER_K79 = { endpoint: '/api/chunk_browser/79', timeout: 30000, retries: 3 } as const;
+
+export const NETWORK_GRAPH_K9 = { endpoint: '/api/network_graph/9', timeout: 30000, retries: 3 } as const;
+
+export const NETWORK_GRAPH_K19 = { endpoint: '/api/network_graph/19', timeout: 30000, retries: 3 } as const;
+
+export const NETWORK_GRAPH_K29 = { endpoint: '/api/network_graph/29', timeout: 30000, retries: 3 } as const;
+
+export const NETWORK_GRAPH_K39 = { endpoint: '/api/network_graph/39', timeout: 30000, retries: 3 } as const;
+
+export const NETWORK_GRAPH_K49 = { endpoint: '/api/network_graph/49', timeout: 30000, retries: 3 } as const;
+
+export const NETWORK_GRAPH_K59 = { endpoint: '/api/network_graph/59', timeout: 30000, retries: 3 } as const;
+
+export const NETWORK_GRAPH_K69 = { endpoint: '/api/network_graph/69', timeout: 30000, retries: 3 } as const;
+
+export const NETWORK_GRAPH_K79 = { endpoint: '/api/network_graph/79', timeout: 30000, retries: 3 } as const;
