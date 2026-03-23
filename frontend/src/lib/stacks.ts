@@ -491,3 +491,5 @@ export const SLA_MONITOR_K19 = { endpoint: '/api/sla_monitor/19', timeout: 30000
 export const SLA_MONITOR_K29 = { endpoint: '/api/sla_monitor/29', timeout: 30000, retries: 3 } as const;
 
 export const SLA_MONITOR_K39 = { endpoint: '/api/sla_monitor/39', timeout: 30000, retries: 3 } as const;
+
+export const SLA_MONITOR_K49 = { endpoint: '/api/sla_monitor/49', timeout: 30000, retries: 3 } as const;
