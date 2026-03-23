@@ -1420,3 +1420,7 @@ body {
 .health_check-sec76 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
 .health_check-sec76 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
 .health_check-sec76 .metric { @apply text-2xl font-bold text-indigo-600; }
+
+.health_check-sec77 { @apply grid gap-4 p-5 rounded-xl bg-white border border-gray-100; }
+.health_check-sec77 .title { @apply text-sm font-semibold text-gray-900 mb-3; }
+.health_check-sec77 .metric { @apply text-2xl font-bold text-indigo-600; }
