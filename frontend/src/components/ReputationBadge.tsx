@@ -1,6 +1,15 @@
 'use client';
 
+import { useState } from 'react';
 import type { ReputationTier } from '@/types/reputation';
+
+const TIER_DESCRIPTIONS: Record<ReputationTier, string> = {
+  unverified: 'No verified activity yet.',
+  bronze: 'Emerging provider — 1 to 100 pts.',
+  silver: 'Established provider — 101 to 300 pts.',
+  gold: 'Trusted provider — 301 to 600 pts.',
+  platinum: 'Elite provider — 601 to 1000 pts.',
+};
 
 interface ReputationBadgeProps {
   tier: ReputationTier;
@@ -24,15 +33,19 @@ const SIZE_CLASSES = {
 };
 
 export default function ReputationBadge({ tier, size = 'md', showLabel = false, animated = false }: ReputationBadgeProps) {
+  const [hovered, setHovered] = useState(false);
   const style = TIER_STYLES[tier];
   const sizeClass = SIZE_CLASSES[size];
   const pulseClass = animated && tier === 'platinum' ? 'animate-pulse' : '';
 
   return (
-    <div className="tier-badge inline-flex items-center gap-2">
+    <div
+      className="tier-badge inline-flex items-center gap-2 relative"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       <div
-        className={`${sizeClass} ${style.bg} ${style.text} ${pulseClass} flex items-center justify-center rounded-full font-bold select-none`}
-        title={style.label}
+        className={`${sizeClass} ${style.bg} ${style.text} ${pulseClass} flex items-center justify-center rounded-full font-bold select-none cursor-default`}
       >
         {style.icon}
       </div>
@@ -40,6 +53,12 @@ export default function ReputationBadge({ tier, size = 'md', showLabel = false, 
         <span className={`text-sm font-medium ${style.text === 'text-white' ? 'text-gray-800' : style.text}`}>
           {style.label} Provider
         </span>
+      )}
+      {hovered && (
+        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-30 w-48 rounded-lg border border-gray-200 bg-white px-3 py-2 shadow-lg text-xs text-gray-600 pointer-events-none">
+          <p className="font-semibold text-gray-800 mb-0.5">{style.label}</p>
+          <p>{TIER_DESCRIPTIONS[tier]}</p>
+        </div>
       )}
     </div>
   );
