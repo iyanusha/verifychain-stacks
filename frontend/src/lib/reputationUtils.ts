@@ -53,6 +53,17 @@ export function getTierIcon(tier: ReputationTier): string {
   return icons[tier];
 }
 
+export function compareProviders(
+  a: { score: ReputationScore },
+  b: { score: ReputationScore }
+): number {
+  return b.score.raw - a.score.raw;
+}
+
+export function getScoreDelta(before: ReputationData, after: ReputationData): number {
+  return calculateReputationScore(after) - calculateReputationScore(before);
+}
+
 export function buildReputationScore(rep: ReputationData): ReputationScore {
   const raw = calculateReputationScore(rep);
   const tier = getReputationTier(raw);
