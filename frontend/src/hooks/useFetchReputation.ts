@@ -84,6 +84,8 @@ export function useFetchReputation(providerId: number): UseFetchReputationResult
 
   useEffect(() => {
     fetch();
+    const interval = setInterval(fetch, 60_000);
+    return () => clearInterval(interval);
   }, [fetch]);
 
   return { reputation, score, loading, error, lastUpdated, refetch: fetch };
