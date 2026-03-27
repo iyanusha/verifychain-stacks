@@ -32,8 +32,10 @@ export default function ProviderCard({ provider, score, clickable = true }: Prov
   return (
     <div
       onClick={handleClick}
-      className={`rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-all ${
-        clickable ? 'cursor-pointer hover:shadow-md hover:border-gray-300' : ''
+      className={`rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-200 ${
+        clickable
+          ? 'cursor-pointer hover:shadow-lg hover:border-primary-300 hover:-translate-y-0.5'
+          : ''
       }`}
     >
       <div className="flex items-start justify-between mb-3">
@@ -41,7 +43,9 @@ export default function ProviderCard({ provider, score, clickable = true }: Prov
           <ReputationBadge tier={score.tier} size="md" />
           <div>
             <p className="text-sm font-semibold text-gray-900">Provider #{provider.id}</p>
-            <p className="text-xs text-gray-400">Block #{provider.registrationBlock}</p>
+            <p className="text-xs text-gray-400">
+              Registered block #{provider.registrationBlock}
+            </p>
           </div>
         </div>
         <div className="flex items-center gap-1.5">
