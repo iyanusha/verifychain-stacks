@@ -77,3 +77,38 @@ export function hashToBuffer(hex: string): Uint8Array {
   }
   return bytes;
 }
+
+export function bufferToHex(bytes: Uint8Array): string {
+  return Array.from(bytes)
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+/** SHA-256 via WebCrypto — available in browser and Node 18+ */
+export async function sha256Hex(data: Uint8Array): Promise<string> {
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  return bufferToHex(new Uint8Array(hashBuffer));
+}
+
+/** Verify a single Merkle path by walking proof hashes from leaf to root */
+export async function verifyMerklePath(
+  chunkHash: string,
+  proof: string[],
+  root: string,
+  index: number
+): Promise<boolean> {
+  let current = chunkHash.toLowerCase();
+  let idx = index;
+
+  for (const sibling of proof) {
+    const sib = sibling.toLowerCase();
+    const isLeft = idx % 2 === 0;
+    const left = isLeft ? current : sib;
+    const right = isLeft ? sib : current;
+    const combined = hashToBuffer(left + right);
+    current = await sha256Hex(combined);
+    idx = Math.floor(idx / 2);
+  }
+
+  return current === root.toLowerCase();
+}
