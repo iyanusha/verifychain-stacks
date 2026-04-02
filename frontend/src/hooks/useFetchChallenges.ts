@@ -39,6 +39,17 @@ const MOCK_CHALLENGES: Challenge[] = [
   },
 ];
 
+interface ChallengeStats {
+  total: number;
+  pending: number;
+  responded: number;
+  validated: number;
+  slashed: number;
+  expired: number;
+  totalSlashAmountMicroStx: number;
+  responseRate: number;
+}
+
 interface UseFetchChallengesResult {
   challenges: Challenge[];
   loading: boolean;
@@ -46,6 +57,7 @@ interface UseFetchChallengesResult {
   refetch: () => void;
   getActiveChallengesForProvider: (providerId: number) => Challenge[];
   filterByStatus: (status: ChallengeStatus) => Challenge[];
+  getStats: () => ChallengeStats;
 }
 
 export function useFetchChallenges(): UseFetchChallengesResult {
@@ -82,5 +94,21 @@ export function useFetchChallenges(): UseFetchChallengesResult {
     [challenges]
   );
 
-  return { challenges, loading, error, refetch: load, getActiveChallengesForProvider, filterByStatus };
+  const getStats = useCallback((): ChallengeStats => {
+    const byStatus = (s: ChallengeStatus) => challenges.filter((c) => c.status === s).length;
+    const responded = challenges.filter((c) => c.responseHash != null).length;
+    const totalSlash = challenges.reduce((sum, c) => sum + (c.slashAmount ?? 0), 0);
+    return {
+      total: challenges.length,
+      pending: byStatus('pending'),
+      responded: byStatus('responded'),
+      validated: byStatus('validated'),
+      slashed: byStatus('slashed'),
+      expired: byStatus('expired'),
+      totalSlashAmountMicroStx: totalSlash,
+      responseRate: challenges.length > 0 ? Math.round((responded / challenges.length) * 100) : 0,
+    };
+  }, [challenges]);
+
+  return { challenges, loading, error, refetch: load, getActiveChallengesForProvider, filterByStatus, getStats };
 }
