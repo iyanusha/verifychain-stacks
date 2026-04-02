@@ -15,13 +15,16 @@ const CURRENT_BLOCK = 144900; // TODO: replace with live block from Stacks API
 interface ChallengeCardProps {
   challenge: Challenge;
   onRespond?: (id: string) => void;
+  merkleRoot?: string;
+  chunkCount?: number;
+  storageSizeMb?: number;
 }
 
 function truncate(str: string, start = 6, end = 4): string {
   return `${str.slice(0, start)}...${str.slice(-end)}`;
 }
 
-export default function ChallengeCard({ challenge, onRespond }: ChallengeCardProps) {
+export default function ChallengeCard({ challenge, onRespond, merkleRoot, chunkCount, storageSizeMb }: ChallengeCardProps) {
   const [expanded, setExpanded] = useState(false);
   const blocksLeft = getBlocksUntilDeadline(challenge, CURRENT_BLOCK);
   const progress = getResponseWindowProgress(challenge, CURRENT_BLOCK);
@@ -102,6 +105,13 @@ export default function ChallengeCard({ challenge, onRespond }: ChallengeCardPro
           <p>Challenge block: #{challenge.challengeBlock}</p>
           <p>Deadline block: #{challenge.responseDeadlineBlock}</p>
           <p>Provider: #{challenge.providerId}</p>
+          {merkleRoot && (
+            <p className="font-mono text-xs text-gray-500 break-all">Merkle root: {merkleRoot.slice(0, 16)}…{merkleRoot.slice(-8)}</p>
+          )}
+          {chunkCount !== undefined && <p>Chunks: {chunkCount}</p>}
+          {storageSizeMb !== undefined && (
+            <p>Storage: {storageSizeMb >= 1024 ? `${(storageSizeMb / 1024).toFixed(1)} GB` : `${storageSizeMb} MB`}</p>
+          )}
           {challenge.slashAmount !== undefined && (
             <p className="text-red-600 font-medium">
               Slash: {(challenge.slashAmount / 1_000_000).toFixed(6)} STX
