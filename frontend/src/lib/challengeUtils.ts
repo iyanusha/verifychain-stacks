@@ -78,6 +78,21 @@ export function hashToBuffer(hex: string): Uint8Array {
   return bytes;
 }
 
+export function formatBlockTime(blocks: number): string {
+  const totalSeconds = blocks * 10 * 60;
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  if (days > 0) return `${days}d ${hours}h`;
+  if (hours > 0) return `${hours}h ${minutes}m`;
+  return `${minutes}m`;
+}
+
+export function estimatedDeadlineTimestamp(challenge: Challenge, currentBlock: number): number {
+  const blocksLeft = getBlocksUntilDeadline(challenge, currentBlock);
+  return Date.now() + blocksLeft * 10 * 60 * 1000;
+}
+
 export function bufferToHex(bytes: Uint8Array): string {
   return Array.from(bytes)
     .map((b) => b.toString(16).padStart(2, '0'))
