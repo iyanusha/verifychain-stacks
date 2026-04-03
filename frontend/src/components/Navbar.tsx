@@ -1,9 +1,14 @@
 "use client";
 
 import { useWallet } from "@/hooks/useWallet";
+import { useFetchChallenges } from "@/hooks/useFetchChallenges";
 
 export default function Navbar() {
   const { isConnected, connect, disconnect, getAddress } = useWallet();
+  const { challenges } = useFetchChallenges();
+  const activeChallengeCount = challenges.filter(
+    (c) => c.status === 'pending' || c.status === 'responded'
+  ).length;
 
   return (
     <nav className="border-b border-gray-200 bg-white">
@@ -22,6 +27,14 @@ export default function Navbar() {
             </a>
             <a href="/providers" className="text-sm text-gray-600 hover:text-gray-900">
               Providers
+            </a>
+            <a href="/challenges" className="relative text-sm text-gray-600 hover:text-gray-900 flex items-center gap-1">
+              Challenges
+              {activeChallengeCount > 0 && (
+                <span className="absolute -top-2 -right-3 inline-flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-white text-[10px] font-bold">
+                  {activeChallengeCount}
+                </span>
+              )}
             </a>
             <a href="#how-it-works" className="text-sm text-gray-600 hover:text-gray-900">
               How It Works
