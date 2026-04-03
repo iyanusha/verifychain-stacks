@@ -26,6 +26,7 @@ export default function ChallengeResponseForm({
   const [proofLines, setProofLines] = useState('');
   const [showHelp, setShowHelp] = useState(false);
   const [draftRestored, setDraftRestored] = useState(false);
+  const [draftSavedAt, setDraftSavedAt] = useState<string | null>(null);
   const [successToast, setSuccessToast] = useState(false);
 
   useEffect(() => {
@@ -45,7 +46,9 @@ export default function ChallengeResponseForm({
 
   useEffect(() => {
     if (responseHash || proofLines) {
-      localStorage.setItem(DRAFT_KEY(challengeId), JSON.stringify({ hash: responseHash, proof: proofLines }));
+      const savedAt = new Date().toLocaleTimeString();
+      localStorage.setItem(DRAFT_KEY(challengeId), JSON.stringify({ hash: responseHash, proof: proofLines, savedAt }));
+      setDraftSavedAt(savedAt);
     }
   }, [challengeId, responseHash, proofLines]);
 
@@ -77,6 +80,9 @@ export default function ChallengeResponseForm({
         <h3 className="text-sm font-semibold text-gray-900">Submit Challenge Response</h3>
         {draftRestored && (
           <span className="text-xs text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">Draft restored</span>
+        )}
+        {draftSavedAt && !draftRestored && (
+          <span className="text-xs text-gray-400">Draft saved {draftSavedAt}</span>
         )}
         {successToast && (
           <span className="text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded-full">Response submitted!</span>
