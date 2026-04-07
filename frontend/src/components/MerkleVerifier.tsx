@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { verifyMerklePath } from '@/lib/challengeUtils';
+import { buildMerkleTree, getProofForIndex, bytesToHex } from '@/lib/merkleUtils';
 
 interface VerificationStep {
   level: number;
@@ -23,6 +24,25 @@ export default function MerkleVerifier({ dataRoot, chunkCount }: MerkleVerifierP
   const [result, setResult] = useState<boolean | null>(null);
   const [verifying, setVerifying] = useState(false);
   const [expandedSteps, setExpandedSteps] = useState<Set<number>>(new Set());
+  const [generatingProof, setGeneratingProof] = useState(false);
+
+  const handleGenerateTestProof = async () => {
+    if (!chunkHash) return;
+    setGeneratingProof(true);
+    try {
+      // Build a test tree from the provided chunkHash as a leaf, padded to chunkCount leaves
+      const leaves: string[] = Array.from({ length: Math.max(2, chunkCount) }, (_, i) =>
+        i === chunkIndex ? chunkHash : bytesToHex(new Uint8Array(32).fill(i))
+      );
+      const tree = await buildMerkleTree(leaves);
+      const proof = getProofForIndex(tree, chunkIndex);
+      setProofText(proof.join('\n'));
+    } catch {
+      // ignore
+    } finally {
+      setGeneratingProof(false);
+    }
+  };
 
   const proof = proofText
     .split('\n')
@@ -124,9 +144,18 @@ export default function MerkleVerifier({ dataRoot, chunkCount }: MerkleVerifierP
       <div>
         <div className="flex items-center justify-between mb-1">
           <label className="text-xs font-medium text-gray-700">Proof (one hash per line)</label>
-          <button onClick={handlePasteProof} className="text-xs text-blue-600 hover:underline">
-            Paste from clipboard
-          </button>
+          <div className="flex gap-2">
+            <button onClick={handlePasteProof} className="text-xs text-blue-600 hover:underline">
+              Paste from clipboard
+            </button>
+            <button
+              onClick={handleGenerateTestProof}
+              disabled={!chunkHash || generatingProof}
+              className="text-xs text-gray-500 hover:underline disabled:opacity-50"
+            >
+              {generatingProof ? 'Generating...' : 'Generate test proof'}
+            </button>
+          </div>
         </div>
         <textarea
           value={proofText}
