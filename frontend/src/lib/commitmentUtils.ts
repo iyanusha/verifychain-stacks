@@ -54,6 +54,15 @@ export function calculateStakeRequirement(
   return storageMb * durationBlocks * baseRate;
 }
 
+export function calculateStakeRequirementFromFormula(
+  storageMb: number,
+  durationBlocks: number,
+  baseRate = 1000
+): number {
+  // Matches contract formula: storage-size-mb * duration-blocks * base-rate (microSTX)
+  return storageMb * durationBlocks * baseRate;
+}
+
 export function buildCommitmentSummary(commitment: Commitment, currentBlock: number): CommitmentSummary {
   return {
     commitment,
