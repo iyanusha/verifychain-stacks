@@ -63,24 +63,33 @@ export default function CommitmentCard({ summary, connectedAddress, onComplete }
 
       <CommitmentProgressBar percentComplete={percentComplete} status={status} />
 
-      {isOwner && (status === 'completed' || status === 'expired') && onComplete && (
-        <button
-          onClick={(e) => { e.stopPropagation(); onComplete(commitment.id); }}
-          className="mt-3 w-full rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-700"
-        >
-          Complete Commitment
-        </button>
-      )}
-
-      {status === 'active' && (
+      <div className="mt-3 flex items-center gap-2">
+        {isOwner && (status === 'completed' || status === 'expired') && onComplete && (
+          <button
+            onClick={(e) => { e.stopPropagation(); onComplete(commitment.id); }}
+            className="flex-1 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-700"
+            title="Call complete-commitment on the registry contract to release stake"
+          >
+            Complete Commitment
+          </button>
+        )}
+        {status === 'active' && (
+          <button
+            onClick={(e) => { e.stopPropagation(); router.push(`/commitments/${commitment.id}`); }}
+            className="rounded-lg border border-primary-300 bg-primary-50 px-3 py-1.5 text-xs font-medium text-primary-700 hover:bg-primary-100"
+            title="Open Merkle proof verifier for this commitment"
+          >
+            View Proof
+          </button>
+        )}
         <button
           onClick={(e) => { e.stopPropagation(); router.push(`/commitments/${commitment.id}`); }}
-          className="mt-3 text-xs text-primary-600 hover:underline"
-          title="View Merkle proof for this commitment"
+          className="ml-auto text-xs text-gray-400 hover:text-gray-600"
+          title="Open commitment detail page"
         >
-          View Proof →
+          Details →
         </button>
-      )}
+      </div>
     </div>
   );
 }
