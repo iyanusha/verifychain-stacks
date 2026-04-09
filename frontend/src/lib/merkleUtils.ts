@@ -76,6 +76,43 @@ export async function buildMerkleTree(leaves: string[]): Promise<string[][]> {
   return tree;
 }
 
+/** Validate all leaves are 64-char hex strings */
+export function validateLeaves(leaves: string[]): { valid: boolean; errors: string[] } {
+  const pattern = /^[0-9a-fA-F]{64}$/;
+  const errors: string[] = [];
+  leaves.forEach((leaf, i) => {
+    if (!pattern.test(leaf)) {
+      errors.push(`Leaf ${i}: expected 64 hex chars, got ${leaf.length} chars`);
+    }
+  });
+  return { valid: errors.length === 0, errors };
+}
+
+/** Compute Merkle root from a single leaf and its proof — without full tree */
+export async function rootFromLeafAndProof(
+  leafHash: string,
+  proof: string[],
+  index: number
+): Promise<string> {
+  let current = leafHash.toLowerCase();
+  let idx = index;
+  for (const sibling of proof) {
+    const sib = sibling.toLowerCase();
+    const isLeft = idx % 2 === 0;
+    const left = isLeft ? current : sib;
+    const right = isLeft ? sib : current;
+    const combined = new Uint8Array(64);
+    const lb = hexToBytes(left);
+    const rb = hexToBytes(right);
+    combined.set(lb, 0);
+    combined.set(rb, 32);
+    const hash = await sha256(combined);
+    current = bytesToHex(hash);
+    idx = Math.floor(idx / 2);
+  }
+  return current;
+}
+
 export function getProofForIndex(tree: string[][], index: number): string[] {
   const proof: string[] = [];
   let idx = index;
