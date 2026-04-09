@@ -36,6 +36,26 @@
   }
 }
 
+/* Challenge protocol styles */
+.challenge-card {
+  border-left: 4px solid #f59e0b;
+}
+.challenge-card--slashed {
+  border-left-color: #dc2626;
+}
+.challenge-timeline-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  flex-shrink: 0;
+}
+.challenge-timeline-line {
+  width: 2px;
+  background: #e5e7eb;
+  flex: 1;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
