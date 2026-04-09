@@ -36,6 +36,33 @@
   }
 }
 
+/* Commitment viewer styles */
+.commitment-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+}
+.commitment-progress {
+  height: 6px;
+  border-radius: 3px;
+  background: #f3f4f6;
+  overflow: hidden;
+}
+.data-root-display {
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  word-break: break-all;
+  background: #f9fafb;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+}
+.merkle-step {
+  border-left: 2px solid #e5e7eb;
+  padding-left: 12px;
+  margin-left: 6px;
+}
+
 /* Challenge protocol styles */
 .challenge-card {
   border-left: 4px solid #f59e0b;
