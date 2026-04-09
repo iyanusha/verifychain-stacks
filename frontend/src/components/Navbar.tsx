@@ -20,7 +20,7 @@ export default function Navbar() {
             <a href="#features" className="text-sm text-gray-600 hover:text-gray-900">
               Features
             </a>
-            <a href="#providers" className="text-sm text-gray-600 hover:text-gray-900">
+            <a href="/providers" className="text-sm text-gray-600 hover:text-gray-900">
               Providers
             </a>
             <a href="#how-it-works" className="text-sm text-gray-600 hover:text-gray-900">
