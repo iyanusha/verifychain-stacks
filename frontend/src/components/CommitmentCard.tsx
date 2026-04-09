@@ -57,7 +57,10 @@ export default function CommitmentCard({ summary, connectedAddress, onComplete }
         </div>
         <div>
           <p className="text-xs text-gray-500">Stake Locked</p>
-          <p className="font-semibold text-gray-800">{stakeInStx} STX</p>
+          <p className="font-semibold text-gray-800" title={`${commitment.stakeRequired} microSTX`}>
+            {stakeInStx} STX
+          </p>
+          <p className="text-xs text-gray-400">{commitment.stakeRequired.toLocaleString()} µSTX</p>
         </div>
       </div>
 
