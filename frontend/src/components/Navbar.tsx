@@ -28,6 +28,9 @@ export default function Navbar() {
             <a href="/providers" className="text-sm text-gray-600 hover:text-gray-900">
               Providers
             </a>
+            <a href="/commitments" className="text-sm text-gray-600 hover:text-gray-900">
+              Commitments
+            </a>
             <a href="/challenges" className="relative text-sm text-gray-600 hover:text-gray-900 flex items-center gap-1">
               Challenges
               {activeChallengeCount > 0 && (
